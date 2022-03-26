@@ -45,8 +45,8 @@ namespace DeltaruneMusicRando
 
         private static string[] SoundsDeltarune = new string[]
         {
-            "berdly_audience", "berdly_descend", "charjoined", "fanfare",
-            "queen_intro", "s_neo_clip", "sink_noise", "spamton_laugh_noise",
+            "berdly_audience", "berdly_descend", "charjoined", "cyber_battle_end",
+            "fanfare", "queen_intro", "s_neo_clip", "sink_noise", "spamton_laugh_noise",
             "static_placeholder", "tv_noise"
         };
 
