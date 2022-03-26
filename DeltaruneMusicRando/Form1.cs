@@ -15,7 +15,7 @@ namespace DeltaruneMusicRando
         private static string[] CreditsSongsUndertale = new string[]
         {
             "mus_cast_1", "mus_cast_2", "mus_cast_3", "mus_cast_4",
-            "mus_cast_5", "mus_cast_6", "mus_cast_7"
+            "mus_cast_5", "mus_cast_6", "mus_cast_7", "mus_express_myself"
         };
 
         private static string[] FloweyFightSongs = new string[]
