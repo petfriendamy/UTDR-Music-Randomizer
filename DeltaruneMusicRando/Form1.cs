@@ -98,6 +98,33 @@ namespace DeltaruneMusicRando
             return false;
         }
 
+        private bool RestoreFromBackup(string musicPath, bool isDeltarune)
+        {
+            try
+            {
+                foreach (var f in Directory.GetFiles(musicPath + @"\backup"))
+                {
+                    string destPath = musicPath, fileName = Path.GetFileName(f);
+                    if (isDeltarune && (fileName.StartsWith("snd_") || fileName.ToLower().StartsWith("audio_intronoise")))
+                    {
+                        destPath = textBoxMusFolder.Text;
+                    }
+                    destPath += @"\" + fileName;
+
+                    if (File.Exists(destPath))
+                    {
+                        File.Delete(destPath);
+                    }
+                    File.Copy(f, destPath);
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         private void buttonBrowse_Click(object sender, EventArgs e)
         {
             DialogResult result;
@@ -288,27 +315,14 @@ namespace DeltaruneMusicRando
                         }
                         catch //something went wrong while moving files
                         {
-                            try //attempt to restore from the backup folder
+                            //attempt to restore from backup
+                            bool restored = RestoreFromBackup(musicPath, isDeltarune);
+                            if (restored)
                             {
-                                foreach (var f in backupFolder.GetFiles())
-                                {
-                                    string destPath = musicPath;
-                                    if (isDeltarune && (f.Name.StartsWith("snd_") || f.Name.StartsWith("audio_intronoise")))
-                                    {
-                                        destPath = textBoxMusFolder.Text;
-                                    }
-                                    destPath += @"\" + f.Name;
-
-                                    if (File.Exists(destPath))
-                                    {
-                                        File.Delete(destPath);
-                                    }
-                                    File.Copy(f.FullName, destPath);
-                                }
-                                MessageBox.Show($"An error ocurred while randomizing. Files were recovered from backup.",
+                                MessageBox.Show("An error ocurred while randomizing. Files were recovered from backup.",
                                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
-                            catch //something went wrong while restoring the backup
+                            else //something went wrong while restoring the backup
                             {
                                 MessageBox.Show("A fatal error occurred, and data could not be recovered. Please reinstall the game.",
                                     "Fatal Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -319,6 +333,43 @@ namespace DeltaruneMusicRando
                     {
                         MessageBox.Show($"Failed to make backup folder. Please check your write permissions.",
                             "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void buttonRestore_Click(object sender, EventArgs e)
+        {
+            if (!IsValidPath(textBoxMusFolder.Text))
+            {
+                MessageBox.Show("Please select a valid install path.", "Invalid Path",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else //check if backup folder exists
+            {
+                bool isDeltarune = File.Exists(textBoxMusFolder.Text + @"\DELTARUNE.exe");
+                string musicPath = textBoxMusFolder.Text;
+                if (isDeltarune)
+                {
+                    musicPath += @"\mus";
+                }
+
+                if (!Directory.Exists(musicPath + @"\backup"))
+                {
+                    MessageBox.Show("Backup folder doesn't exist.", "No backup",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    bool restored = RestoreFromBackup(musicPath, isDeltarune);
+                    if (restored)
+                    {
+                        MessageBox.Show("Restored from backup!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else //something went wrong while restoring the backup
+                    {
+                        MessageBox.Show("A fatal error occurred, and data could not be recovered. Please reinstall the game.",
+                            "Fatal Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

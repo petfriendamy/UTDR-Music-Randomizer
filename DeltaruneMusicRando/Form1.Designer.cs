@@ -39,6 +39,7 @@
             this.checkBoxAmbience = new System.Windows.Forms.CheckBox();
             this.checkBoxSpeedrunLegal = new System.Windows.Forms.CheckBox();
             this.buttonRandomize = new System.Windows.Forms.Button();
+            this.buttonRestore = new System.Windows.Forms.Button();
             this.groupBoxOptions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,7 +85,7 @@
             this.groupBoxOptions.Controls.Add(this.checkBoxSpeedrunLegal);
             this.groupBoxOptions.Location = new System.Drawing.Point(12, 56);
             this.groupBoxOptions.Name = "groupBoxOptions";
-            this.groupBoxOptions.Size = new System.Drawing.Size(410, 184);
+            this.groupBoxOptions.Size = new System.Drawing.Size(410, 175);
             this.groupBoxOptions.TabIndex = 3;
             this.groupBoxOptions.TabStop = false;
             this.groupBoxOptions.Text = "Options";
@@ -153,7 +154,7 @@
             // 
             this.buttonRandomize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRandomize.Location = new System.Drawing.Point(12, 246);
+            this.buttonRandomize.Location = new System.Drawing.Point(12, 237);
             this.buttonRandomize.Name = "buttonRandomize";
             this.buttonRandomize.Size = new System.Drawing.Size(410, 23);
             this.buttonRandomize.TabIndex = 4;
@@ -161,17 +162,30 @@
             this.buttonRandomize.UseVisualStyleBackColor = true;
             this.buttonRandomize.Click += new System.EventHandler(this.buttonRandomize_Click);
             // 
+            // buttonRestore
+            // 
+            this.buttonRestore.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonRestore.Location = new System.Drawing.Point(12, 266);
+            this.buttonRestore.Name = "buttonRestore";
+            this.buttonRestore.Size = new System.Drawing.Size(410, 23);
+            this.buttonRestore.TabIndex = 5;
+            this.buttonRestore.Text = "Restore from backup";
+            this.buttonRestore.UseVisualStyleBackColor = true;
+            this.buttonRestore.Click += new System.EventHandler(this.buttonRestore_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 281);
+            this.ClientSize = new System.Drawing.Size(434, 301);
+            this.Controls.Add(this.buttonRestore);
             this.Controls.Add(this.buttonRandomize);
             this.Controls.Add(this.groupBoxOptions);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonBrowse);
             this.Controls.Add(this.textBoxMusFolder);
-            this.MinimumSize = new System.Drawing.Size(450, 320);
+            this.MinimumSize = new System.Drawing.Size(450, 340);
             this.Name = "Form1";
             this.Text = "Undertale/Deltarune Music Randomizer";
             this.groupBoxOptions.ResumeLayout(false);
@@ -194,5 +208,6 @@
         private CheckBox checkBoxCyberBattle;
         private CheckBox checkBoxMultiPart;
         private CheckBox checkBoxSFX;
+        private Button buttonRestore;
     }
 }
