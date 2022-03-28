@@ -49,13 +49,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxMusFolder.Location = new System.Drawing.Point(12, 27);
             this.textBoxMusFolder.Name = "textBoxMusFolder";
-            this.textBoxMusFolder.Size = new System.Drawing.Size(329, 23);
+            this.textBoxMusFolder.Size = new System.Drawing.Size(379, 23);
             this.textBoxMusFolder.TabIndex = 0;
             // 
             // buttonBrowse
             // 
             this.buttonBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBrowse.Location = new System.Drawing.Point(347, 27);
+            this.buttonBrowse.Location = new System.Drawing.Point(397, 27);
             this.buttonBrowse.Name = "buttonBrowse";
             this.buttonBrowse.Size = new System.Drawing.Size(75, 23);
             this.buttonBrowse.TabIndex = 1;
@@ -85,7 +85,7 @@
             this.groupBoxOptions.Controls.Add(this.checkBoxSpeedrunLegal);
             this.groupBoxOptions.Location = new System.Drawing.Point(12, 56);
             this.groupBoxOptions.Name = "groupBoxOptions";
-            this.groupBoxOptions.Size = new System.Drawing.Size(410, 175);
+            this.groupBoxOptions.Size = new System.Drawing.Size(460, 180);
             this.groupBoxOptions.TabIndex = 3;
             this.groupBoxOptions.TabStop = false;
             this.groupBoxOptions.Text = "Options";
@@ -154,9 +154,11 @@
             // 
             this.buttonRandomize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRandomize.Location = new System.Drawing.Point(12, 237);
+            this.buttonRandomize.Enabled = false;
+            this.buttonRandomize.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonRandomize.Location = new System.Drawing.Point(12, 242);
             this.buttonRandomize.Name = "buttonRandomize";
-            this.buttonRandomize.Size = new System.Drawing.Size(410, 23);
+            this.buttonRandomize.Size = new System.Drawing.Size(460, 38);
             this.buttonRandomize.TabIndex = 4;
             this.buttonRandomize.Text = "Randomize!";
             this.buttonRandomize.UseVisualStyleBackColor = true;
@@ -166,9 +168,10 @@
             // 
             this.buttonRestore.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRestore.Location = new System.Drawing.Point(12, 266);
+            this.buttonRestore.Enabled = false;
+            this.buttonRestore.Location = new System.Drawing.Point(12, 286);
             this.buttonRestore.Name = "buttonRestore";
-            this.buttonRestore.Size = new System.Drawing.Size(410, 23);
+            this.buttonRestore.Size = new System.Drawing.Size(460, 23);
             this.buttonRestore.TabIndex = 5;
             this.buttonRestore.Text = "Restore from backup";
             this.buttonRestore.UseVisualStyleBackColor = true;
@@ -178,14 +181,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 301);
+            this.ClientSize = new System.Drawing.Size(484, 321);
             this.Controls.Add(this.buttonRestore);
             this.Controls.Add(this.buttonRandomize);
             this.Controls.Add(this.groupBoxOptions);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonBrowse);
             this.Controls.Add(this.textBoxMusFolder);
-            this.MinimumSize = new System.Drawing.Size(450, 340);
+            this.MinimumSize = new System.Drawing.Size(450, 360);
             this.Name = "Form1";
             this.Text = "Undertale/Deltarune Music Randomizer";
             this.groupBoxOptions.ResumeLayout(false);

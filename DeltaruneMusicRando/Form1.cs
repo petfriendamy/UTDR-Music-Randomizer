@@ -30,8 +30,8 @@ namespace DeltaruneMusicRando
         private static string[] AmbienceDeltarune = new string[]
         {
             "alley_ambience", "audio_drone", "bird", "deep_noise", "elevator",
-            "honksong", "mus_birdnoise", "ocean", "shinkansen", "w",
-            "wind_highplace", "wind"
+            "honksong", "mus_birdnoise", "ocean", "shinkansen", "sink_noise",
+            "w", "wind_highplace", "wind"
         };
 
         private static string[] AmbienceUndertale = new string[]
@@ -46,7 +46,7 @@ namespace DeltaruneMusicRando
         private static string[] SoundsDeltarune = new string[]
         {
             "berdly_audience", "berdly_descend", "charjoined", "cyber_battle_end",
-            "fanfare", "queen_intro", "s_neo_clip", "sink_noise", "spamton_laugh_noise",
+            "fanfare", "queen_intro", "s_neo_clip", "spamton_laugh_noise",
             "static_placeholder", "tv_noise"
         };
 
@@ -98,6 +98,188 @@ namespace DeltaruneMusicRando
             return false;
         }
 
+        private void EnableOrDisableControls(bool enable)
+        {
+            textBoxMusFolder.Enabled = enable;
+            buttonBrowse.Enabled = enable;
+            buttonRandomize.Enabled = enable;
+            buttonRestore.Enabled = enable;
+
+            foreach (var c in groupBoxOptions.Controls)
+            {
+                if (c is CheckBox) {
+                    (c as CheckBox).Enabled = enable;
+                }
+            }
+        }
+
+        private void Randomize()
+        {
+            string musicPath = textBoxMusFolder.Text;
+            bool isDeltarune = false;
+            if (File.Exists(textBoxMusFolder.Text + @"\DELTARUNE.exe"))
+            {
+                musicPath += @"\mus";
+                isDeltarune = true;
+            }
+            string[] files = Directory.GetFiles(musicPath);
+            IEnumerable<string>? oggFiles;
+            if (isDeltarune)
+            {
+                oggFiles =
+                    from f in files
+                    where Path.GetExtension(f) == ".ogg"
+                    where (checkBoxSpeedrunLegal.Checked ? true : !SpeedrunIllegalSongs.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
+                    where (checkBoxCyberBattle.Checked ? true : Path.GetFileNameWithoutExtension(f) != "cyber_battle_prelude")
+                    where (checkBoxCredits.Checked ? true : !CreditsSongsDeltarune.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
+                    where (checkBoxAmbience.Checked ? true : !AmbienceDeltarune.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
+                    where (checkBoxSFX.Checked ? true : !SoundsDeltarune.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
+                    select f;
+            }
+            else //Undertale
+            {
+                oggFiles =
+                    from f in files
+                    where Path.GetExtension(f) == ".ogg"
+                    where Path.GetFileNameWithoutExtension(f) != "mus_silence"
+                    where Path.GetFileNameWithoutExtension(f) != "mus_story_stuck"
+                    where (checkBoxMultiPart.Checked ? true : !FloweyFightSongs.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
+                    where (checkBoxCredits.Checked ? true : !CreditsSongsUndertale.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
+                    where (checkBoxAmbience.Checked ? true : !AmbienceUndertale.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
+                    where (checkBoxSFX.Checked ? true : !SoundsUndertale.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
+                    select f;
+            }
+
+            if (!oggFiles.Any())
+            {
+                MessageBox.Show("No valid OGG files found.", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            else
+            {
+                try //attempt to make a backup folder
+                {
+                    bool makeBackup = false;
+                    string temp = musicPath + @"\backup";
+                    if (Directory.Exists(temp))
+                    {
+                        var result = MessageBox.Show("Backup folder already exists. Overwrite it? (If you have randomized previously, this will backup the randomized files!)",
+                            "Overwrite Backup?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                        if (result == DialogResult.Cancel)
+                        {
+                            return;
+                        }
+                        else if (result == DialogResult.Yes)
+                        {
+                            makeBackup = true;
+                        }
+                    }
+                    else
+                    {
+                        makeBackup = true;
+                    }
+                    var backupFolder = Directory.CreateDirectory(temp);
+
+                    try //attempt to move files to the backup folder
+                    {
+                        var tempNames = new List<SongFile>();
+
+                        foreach (var f in oggFiles)
+                        {
+                            temp = Path.GetFileName(f);
+                            tempNames.Add(new SongFile(temp));
+                            if (makeBackup || !File.Exists(backupFolder.FullName + @"\" + temp))
+                            {
+                                File.Move(f, backupFolder.FullName + @"\" + temp, true);
+                            }
+                            else
+                            {
+                                File.Delete(f);
+                            }
+                        }
+
+                        if (isDeltarune && checkBoxSFX.Checked) //grab SFX from base folder
+                        {
+                            var drFiles = Directory.GetFiles(textBoxMusFolder.Text);
+                            var drSounds =
+                                from f in drFiles
+                                where Path.GetExtension(f) == ".ogg"
+                                select f;
+
+                            foreach (var f in drSounds)
+                            {
+                                temp = Path.GetFileName(f);
+                                tempNames.Add(new SongFile(temp, true));
+                                if (makeBackup || !File.Exists(backupFolder.FullName + @"\" + temp))
+                                {
+                                    File.Move(f, backupFolder.FullName + @"\" + temp, true);
+                                }
+                                else
+                                {
+                                    File.Delete(f);
+                                }
+                            }
+                        }
+
+                        var rng = new Random();
+                        int i = 0;
+                        foreach (var f in backupFolder.GetFiles())
+                        {
+                            if (oggFiles.Contains((musicPath + @"\" + f.Name).Replace(@"\\", @"\")) ||
+                                (isDeltarune && checkBoxSFX.Checked &&
+                                (f.Name.StartsWith("snd_") || f.Name.StartsWith("audio_intronoise"))))
+                            {
+                                do
+                                {
+                                    i = rng.Next(tempNames.Count);
+                                } while (tempNames[i].Name == Path.GetFileName(f.Name));
+
+                                if (tempNames[i].FromBaseFolder)
+                                {
+                                    temp = textBoxMusFolder.Text + @"\" + tempNames[i].Name;
+                                }
+                                else
+                                {
+                                    temp = musicPath + @"\" + tempNames[i].Name;
+                                }
+                                File.Copy(f.FullName, temp);
+                                tempNames.RemoveAt(i);
+                            }
+                        }
+
+                        temp = "Randomization complete!";
+                        if (makeBackup)
+                        {
+                            temp += " Original files were copied to ";
+                            if (isDeltarune) { temp += @"\mus"; }
+                            temp += @"\backup";
+                        }
+                        MessageBox.Show(temp, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch //something went wrong while moving files
+                    {
+                        //attempt to restore from backup
+                        bool restored = RestoreFromBackup(musicPath, isDeltarune);
+                        if (restored)
+                        {
+                            MessageBox.Show("An error ocurred while randomizing. Files were recovered from backup.",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else //something went wrong while restoring the backup
+                        {
+                            MessageBox.Show("A fatal error occurred, and data could not be recovered. Please reinstall the game.",
+                                "Fatal Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                catch //failed to make backup folder
+                {
+                    MessageBox.Show($"Failed to make backup folder. Please check your write permissions.",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
         private bool RestoreFromBackup(string musicPath, bool isDeltarune)
         {
             try
@@ -143,6 +325,8 @@ namespace DeltaruneMusicRando
                     if (IsValidPath(path))
                     {
                         textBoxMusFolder.Text = path;
+                        buttonRandomize.Enabled = true;
+                        buttonRestore.Enabled = true;
                     }
                     else
                     {
@@ -158,7 +342,7 @@ namespace DeltaruneMusicRando
             }
         }
 
-        private void buttonRandomize_Click(object sender, EventArgs e)
+        private async void buttonRandomize_Click(object sender, EventArgs e)
         {
             if (!Directory.Exists(textBoxMusFolder.Text))
             {
@@ -172,173 +356,14 @@ namespace DeltaruneMusicRando
             }
             else
             {
-                string musicPath = textBoxMusFolder.Text;
-                bool isDeltarune = false;
-                if (File.Exists(textBoxMusFolder.Text + @"\DELTARUNE.exe"))
-                {
-                    musicPath += @"\mus";
-                    isDeltarune = true;
-                }
-                string[] files = Directory.GetFiles(musicPath);
-                IEnumerable<string>? oggFiles;
-                if (isDeltarune)
-                {
-                    oggFiles =
-                        from f in files
-                        where Path.GetExtension(f) == ".ogg"
-                        where (checkBoxSpeedrunLegal.Checked ? true : !SpeedrunIllegalSongs.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
-                        where (checkBoxCyberBattle.Checked ? true : Path.GetFileNameWithoutExtension(f) != "cyber_battle_prelude")
-                        where (checkBoxCredits.Checked ? true : !CreditsSongsDeltarune.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
-                        where (checkBoxAmbience.Checked ? true : !AmbienceDeltarune.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
-                        where (checkBoxSFX.Checked ? true : !SoundsDeltarune.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
-                        select f;
-                }
-                else //Undertale
-                {
-                    oggFiles =
-                        from f in files
-                        where Path.GetExtension(f) == ".ogg"
-                        where Path.GetFileNameWithoutExtension(f) != "mus_silence"
-                        where Path.GetFileNameWithoutExtension(f) != "mus_story_stuck"
-                        where (checkBoxMultiPart.Checked ? true : !FloweyFightSongs.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
-                        where (checkBoxCredits.Checked ? true : !CreditsSongsUndertale.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
-                        where (checkBoxAmbience.Checked ? true : !AmbienceUndertale.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
-                        where (checkBoxSFX.Checked ? true : !SoundsUndertale.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
-                        select f;
-                }
-
-                if (!oggFiles.Any())
-                {
-                    MessageBox.Show("No valid OGG files found.", "Error", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
-                else
-                {
-                    try //attempt to make a backup folder
-                    {
-                        bool makeBackup = false;
-                        string temp = musicPath + @"\backup";
-                        if (Directory.Exists(temp))
-                        {
-                            var result = MessageBox.Show("Backup folder already exists. Overwrite it? (If you have randomized previously, this will backup the randomized files!)",
-                                "Overwrite Backup?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                            if (result == DialogResult.Cancel)
-                            {
-                                return;
-                            }
-                            else if (result == DialogResult.Yes)
-                            {
-                                makeBackup = true;
-                            }
-                        }
-                        else
-                        {
-                            makeBackup = true;
-                        }
-                        var backupFolder = Directory.CreateDirectory(temp);
-
-                        try //attempt to move files to the backup folder
-                        {
-                            var tempNames = new List<SongFile>();
-
-                            foreach (var f in oggFiles)
-                            {
-                                temp = Path.GetFileName(f);
-                                tempNames.Add(new SongFile(temp));
-                                if (makeBackup || !File.Exists(backupFolder.FullName + @"\" + temp))
-                                {
-                                    File.Move(f, backupFolder.FullName + @"\" + temp, true);
-                                }
-                                else
-                                {
-                                    File.Delete(f);
-                                }
-                            }
-
-                            if (isDeltarune && checkBoxSFX.Checked) //grab SFX from base folder
-                            {
-                                var drFiles = Directory.GetFiles(textBoxMusFolder.Text);
-                                var drSounds =
-                                    from f in drFiles
-                                    where Path.GetExtension(f) == ".ogg"
-                                    select f;
-
-                                foreach (var f in drSounds)
-                                {
-                                    temp = Path.GetFileName(f);
-                                    tempNames.Add(new SongFile(temp, true));
-                                    if (makeBackup || !File.Exists(backupFolder.FullName + @"\" + temp))
-                                    {
-                                        File.Move(f, backupFolder.FullName + @"\" + temp, true);
-                                    }
-                                    else
-                                    {
-                                        File.Delete(f);
-                                    }
-                                }
-                            }
-
-                            var rng = new Random();
-                            int i = 0;
-                            foreach (var f in backupFolder.GetFiles())
-                            {
-                                if (oggFiles.Contains((musicPath + @"\" + f.Name).Replace(@"\\", @"\")) ||
-                                    (isDeltarune && checkBoxSFX.Checked &&
-                                    (f.Name.StartsWith("snd_") || f.Name.StartsWith("audio_intronoise"))))
-                                {
-                                    do
-                                    {
-                                        i = rng.Next(tempNames.Count);
-                                    } while (tempNames[i].Name == Path.GetFileName(f.Name));
-
-                                    if (tempNames[i].FromBaseFolder)
-                                    {
-                                        temp = textBoxMusFolder.Text + @"\" + tempNames[i].Name;
-                                    }
-                                    else
-                                    {
-                                        temp = musicPath + @"\" + tempNames[i].Name;
-                                    }
-                                    File.Copy(f.FullName, temp);
-                                    tempNames.RemoveAt(i);
-                                }
-                            }
-
-                            temp = "Randomization complete!";
-                            if (makeBackup)
-                            {
-                                temp += " Original files were copied to ";
-                                if (isDeltarune) { temp += @"\mus"; }
-                                temp += @"\backup";
-                            }
-                            MessageBox.Show(temp, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        catch //something went wrong while moving files
-                        {
-                            //attempt to restore from backup
-                            bool restored = RestoreFromBackup(musicPath, isDeltarune);
-                            if (restored)
-                            {
-                                MessageBox.Show("An error ocurred while randomizing. Files were recovered from backup.",
-                                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                            else //something went wrong while restoring the backup
-                            {
-                                MessageBox.Show("A fatal error occurred, and data could not be recovered. Please reinstall the game.",
-                                    "Fatal Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-                    }
-                    catch //failed to make backup folder
-                    {
-                        MessageBox.Show($"Failed to make backup folder. Please check your write permissions.",
-                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
+                EnableOrDisableControls(false);
+                Task task = Task.Run(() => Randomize());
+                await task;
+                EnableOrDisableControls(true);
             }
         }
 
-        private void buttonRestore_Click(object sender, EventArgs e)
+        private async void buttonRestore_Click(object sender, EventArgs e)
         {
             if (!IsValidPath(textBoxMusFolder.Text))
             {
@@ -361,7 +386,10 @@ namespace DeltaruneMusicRando
                 }
                 else
                 {
-                    bool restored = RestoreFromBackup(musicPath, isDeltarune);
+                    EnableOrDisableControls(false);
+                    Task<bool> task = Task.Run(() => RestoreFromBackup(musicPath, isDeltarune));
+                    await task;
+                    bool restored = task.Result;
                     if (restored)
                     {
                         MessageBox.Show("Restored from backup!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -371,6 +399,7 @@ namespace DeltaruneMusicRando
                         MessageBox.Show("A fatal error occurred, and data could not be recovered. Please reinstall the game.",
                             "Fatal Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                    EnableOrDisableControls(true);
                 }
             }
         }
