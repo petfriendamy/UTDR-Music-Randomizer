@@ -1,6 +1,8 @@
-﻿namespace DeltaruneMusicRando
+﻿using System.Windows.Forms;
+
+namespace UTDRMusicRandomizer
 {
-    partial class Form1
+    partial class MainFormWindows : Form
     {
         /// <summary>
         ///  Required designer variable.
@@ -47,17 +49,17 @@
             // 
             this.textBoxMusFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxMusFolder.Location = new System.Drawing.Point(12, 27);
+            this.textBoxMusFolder.Location = new System.Drawing.Point(10, 23);
             this.textBoxMusFolder.Name = "textBoxMusFolder";
-            this.textBoxMusFolder.Size = new System.Drawing.Size(379, 23);
+            this.textBoxMusFolder.Size = new System.Drawing.Size(325, 20);
             this.textBoxMusFolder.TabIndex = 0;
             // 
             // buttonBrowse
             // 
             this.buttonBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBrowse.Location = new System.Drawing.Point(397, 27);
+            this.buttonBrowse.Location = new System.Drawing.Point(340, 23);
             this.buttonBrowse.Name = "buttonBrowse";
-            this.buttonBrowse.Size = new System.Drawing.Size(75, 23);
+            this.buttonBrowse.Size = new System.Drawing.Size(64, 20);
             this.buttonBrowse.TabIndex = 1;
             this.buttonBrowse.Text = "Browse...";
             this.buttonBrowse.UseVisualStyleBackColor = true;
@@ -66,9 +68,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(10, 8);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(264, 15);
+            this.label1.Size = new System.Drawing.Size(239, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Please locate Undertale/Deltarune\'s install folder:";
             // 
@@ -83,9 +85,9 @@
             this.groupBoxOptions.Controls.Add(this.checkBoxCredits);
             this.groupBoxOptions.Controls.Add(this.checkBoxAmbience);
             this.groupBoxOptions.Controls.Add(this.checkBoxSpeedrunLegal);
-            this.groupBoxOptions.Location = new System.Drawing.Point(12, 56);
+            this.groupBoxOptions.Location = new System.Drawing.Point(10, 49);
             this.groupBoxOptions.Name = "groupBoxOptions";
-            this.groupBoxOptions.Size = new System.Drawing.Size(460, 180);
+            this.groupBoxOptions.Size = new System.Drawing.Size(394, 156);
             this.groupBoxOptions.TabIndex = 3;
             this.groupBoxOptions.TabStop = false;
             this.groupBoxOptions.Text = "Options";
@@ -93,9 +95,9 @@
             // checkBoxSFX
             // 
             this.checkBoxSFX.AutoSize = true;
-            this.checkBoxSFX.Location = new System.Drawing.Point(6, 147);
+            this.checkBoxSFX.Location = new System.Drawing.Point(5, 127);
             this.checkBoxSFX.Name = "checkBoxSFX";
-            this.checkBoxSFX.Size = new System.Drawing.Size(354, 19);
+            this.checkBoxSFX.Size = new System.Drawing.Size(326, 17);
             this.checkBoxSFX.TabIndex = 5;
             this.checkBoxSFX.Text = "Include jingles and sound effects (may have VERY BAD results)";
             this.checkBoxSFX.UseVisualStyleBackColor = true;
@@ -103,9 +105,9 @@
             // checkBoxMultiPart
             // 
             this.checkBoxMultiPart.AutoSize = true;
-            this.checkBoxMultiPart.Location = new System.Drawing.Point(6, 72);
+            this.checkBoxMultiPart.Location = new System.Drawing.Point(5, 62);
             this.checkBoxMultiPart.Name = "checkBoxMultiPart";
-            this.checkBoxMultiPart.Size = new System.Drawing.Size(273, 19);
+            this.checkBoxMultiPart.Size = new System.Drawing.Size(247, 17);
             this.checkBoxMultiPart.TabIndex = 2;
             this.checkBoxMultiPart.Text = "Include Your Best Nightmare + Finale (UT only)";
             this.checkBoxMultiPart.UseVisualStyleBackColor = true;
@@ -113,9 +115,9 @@
             // checkBoxCyberBattle
             // 
             this.checkBoxCyberBattle.AutoSize = true;
-            this.checkBoxCyberBattle.Location = new System.Drawing.Point(6, 47);
+            this.checkBoxCyberBattle.Location = new System.Drawing.Point(5, 41);
             this.checkBoxCyberBattle.Name = "checkBoxCyberBattle";
-            this.checkBoxCyberBattle.Size = new System.Drawing.Size(327, 19);
+            this.checkBoxCyberBattle.Size = new System.Drawing.Size(296, 17);
             this.checkBoxCyberBattle.TabIndex = 1;
             this.checkBoxCyberBattle.Text = "Include cyber_battle_prelude.ogg (DR only, may softlock)";
             this.checkBoxCyberBattle.UseVisualStyleBackColor = true;
@@ -123,9 +125,9 @@
             // checkBoxCredits
             // 
             this.checkBoxCredits.AutoSize = true;
-            this.checkBoxCredits.Location = new System.Drawing.Point(6, 97);
+            this.checkBoxCredits.Location = new System.Drawing.Point(5, 84);
             this.checkBoxCredits.Name = "checkBoxCredits";
-            this.checkBoxCredits.Size = new System.Drawing.Size(137, 19);
+            this.checkBoxCredits.Size = new System.Drawing.Size(126, 17);
             this.checkBoxCredits.TabIndex = 3;
             this.checkBoxCredits.Text = "Include credits songs";
             this.checkBoxCredits.UseVisualStyleBackColor = true;
@@ -133,9 +135,9 @@
             // checkBoxAmbience
             // 
             this.checkBoxAmbience.AutoSize = true;
-            this.checkBoxAmbience.Location = new System.Drawing.Point(6, 122);
+            this.checkBoxAmbience.Location = new System.Drawing.Point(5, 106);
             this.checkBoxAmbience.Name = "checkBoxAmbience";
-            this.checkBoxAmbience.Size = new System.Drawing.Size(120, 19);
+            this.checkBoxAmbience.Size = new System.Drawing.Size(110, 17);
             this.checkBoxAmbience.TabIndex = 4;
             this.checkBoxAmbience.Text = "Include ambience";
             this.checkBoxAmbience.UseVisualStyleBackColor = true;
@@ -143,9 +145,9 @@
             // checkBoxSpeedrunLegal
             // 
             this.checkBoxSpeedrunLegal.AutoSize = true;
-            this.checkBoxSpeedrunLegal.Location = new System.Drawing.Point(6, 22);
+            this.checkBoxSpeedrunLegal.Location = new System.Drawing.Point(5, 19);
             this.checkBoxSpeedrunLegal.Name = "checkBoxSpeedrunLegal";
-            this.checkBoxSpeedrunLegal.Size = new System.Drawing.Size(323, 19);
+            this.checkBoxSpeedrunLegal.Size = new System.Drawing.Size(290, 17);
             this.checkBoxSpeedrunLegal.TabIndex = 0;
             this.checkBoxSpeedrunLegal.Text = "Include cyber.ogg and mansion.ogg (only applies to DR)";
             this.checkBoxSpeedrunLegal.UseVisualStyleBackColor = true;
@@ -155,10 +157,10 @@
             this.buttonRandomize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonRandomize.Enabled = false;
-            this.buttonRandomize.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonRandomize.Location = new System.Drawing.Point(12, 242);
+            this.buttonRandomize.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.buttonRandomize.Location = new System.Drawing.Point(10, 210);
             this.buttonRandomize.Name = "buttonRandomize";
-            this.buttonRandomize.Size = new System.Drawing.Size(460, 38);
+            this.buttonRandomize.Size = new System.Drawing.Size(394, 33);
             this.buttonRandomize.TabIndex = 4;
             this.buttonRandomize.Text = "Randomize!";
             this.buttonRandomize.UseVisualStyleBackColor = true;
@@ -169,27 +171,27 @@
             this.buttonRestore.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonRestore.Enabled = false;
-            this.buttonRestore.Location = new System.Drawing.Point(12, 286);
+            this.buttonRestore.Location = new System.Drawing.Point(10, 248);
             this.buttonRestore.Name = "buttonRestore";
-            this.buttonRestore.Size = new System.Drawing.Size(460, 23);
+            this.buttonRestore.Size = new System.Drawing.Size(394, 20);
             this.buttonRestore.TabIndex = 5;
             this.buttonRestore.Text = "Restore from backup";
             this.buttonRestore.UseVisualStyleBackColor = true;
             this.buttonRestore.Click += new System.EventHandler(this.buttonRestore_Click);
             // 
-            // Form1
+            // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 321);
+            this.ClientSize = new System.Drawing.Size(415, 278);
             this.Controls.Add(this.buttonRestore);
             this.Controls.Add(this.buttonRandomize);
             this.Controls.Add(this.groupBoxOptions);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonBrowse);
             this.Controls.Add(this.textBoxMusFolder);
-            this.MinimumSize = new System.Drawing.Size(450, 360);
-            this.Name = "Form1";
+            this.MinimumSize = new System.Drawing.Size(388, 317);
+            this.Name = "MainForm";
             this.Text = "Undertale/Deltarune Music Randomizer";
             this.groupBoxOptions.ResumeLayout(false);
             this.groupBoxOptions.PerformLayout();

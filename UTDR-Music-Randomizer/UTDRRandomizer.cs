@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DeltaruneMusicRando
+namespace UTDRMusicRandomizer
 {
     public static class UTDRRandomizer
     {
@@ -94,6 +95,10 @@ namespace DeltaruneMusicRando
                 {
                     return true;
                 }
+                else if (IsMac(path) || IsLinux(path))
+                {
+                    return true;
+                }
                 return false;
             }
             return false;
@@ -101,31 +106,71 @@ namespace DeltaruneMusicRando
 
         public static bool IsDeltarune(string basePath)
         {
-            return File.Exists(basePath + @"\DELTARUNE.exe");
+            return File.Exists(basePath + @"\DELTARUNE.exe") || Path.GetFileName(basePath) == "DELTARUNE.app";
+        }
+
+        public static bool IsMac(string basePath)
+        {
+            return (Path.GetFileName(basePath) == "UNDERTALE.app" || Path.GetFileName(basePath) == "DELTARUNE.app") && Directory.Exists(basePath + "/Contents");
+        }
+
+        public static bool IsLinux(string basePath)
+        {
+            return File.Exists(basePath + "/run.sh") && Directory.Exists(basePath + "/assets");
+        }
+
+        private static char GetSeparator(string basePath)
+        {
+            if (IsMac(basePath) || IsLinux(basePath))
+            {
+                return '/';
+            }
+            else
+            {
+                return '\\';
+            }
+        }
+
+        private static string GetBasePath(string installPath)
+        {
+            string basePath = installPath;
+            if (IsMac(installPath))
+            {
+                basePath += "/Contents/Resources";
+            }
+            else if (IsLinux(installPath))
+            {
+                basePath += "/assets";
+            }
+            return basePath;
+        }
+
+        private static string GetMusicPath(string basePath)
+        {
+            string musicPath = GetBasePath(basePath);
+            if (IsDeltarune(basePath))
+            {
+                musicPath += GetSeparator(basePath) + "mus";
+            }
+            return musicPath;
+        }
+
+        private static string GetBackupPath(string basePath)
+        {
+            return GetMusicPath(basePath) + GetSeparator(basePath) + "backup";
         }
 
         public static bool BackupFolderExists(string basePath)
         {
-            bool isDeltarune = IsDeltarune(basePath);
-            string musicPath = basePath;
-            if (isDeltarune)
-            {
-                musicPath += @"\mus";
-            }
-
-            return Directory.Exists(musicPath + @"\backup");
+            return Directory.Exists(GetBackupPath(basePath));
         }
 
         public static RandoResult Randomize(string basePath, RandoOptions options, bool makeBackup)
         {
-            string musicPath = basePath;
+            string musicPath = GetMusicPath(basePath);
             bool isDeltarune = IsDeltarune(basePath);
-            if (isDeltarune)
-            {
-                musicPath += @"\mus";
-            }
             string[] files = Directory.GetFiles(musicPath);
-            IEnumerable<string>? oggFiles;
+            IEnumerable<string> oggFiles;
             if (isDeltarune)
             {
                 oggFiles =
@@ -160,7 +205,8 @@ namespace DeltaruneMusicRando
             {
                 try //attempt to make a backup folder
                 {
-                    string temp = musicPath + @"\backup";
+                    string temp = GetBackupPath(basePath), backupFilePath;
+                    char separator = GetSeparator(basePath);
                     var backupFolder = Directory.CreateDirectory(temp);
 
                     try //attempt to move files to the backup folder
@@ -170,10 +216,12 @@ namespace DeltaruneMusicRando
                         foreach (var f in oggFiles)
                         {
                             temp = Path.GetFileName(f);
+                            backupFilePath = backupFolder.FullName + separator + temp;
                             tempNames.Add(new SongFile(temp));
-                            if (makeBackup || !File.Exists(backupFolder.FullName + @"\" + temp))
+                            if (makeBackup || !File.Exists(backupFilePath))
                             {
-                                File.Move(f, backupFolder.FullName + @"\" + temp, true);
+                                File.Delete(backupFilePath);
+                                File.Move(f, backupFilePath);
                             }
                             else
                             {
@@ -183,7 +231,7 @@ namespace DeltaruneMusicRando
 
                         if (isDeltarune && options.SFX) //grab SFX from base folder
                         {
-                            var drFiles = Directory.GetFiles(basePath);
+                            var drFiles = Directory.GetFiles(GetBasePath(basePath));
                             var drSounds =
                                 from f in drFiles
                                 where Path.GetExtension(f) == ".ogg"
@@ -192,10 +240,12 @@ namespace DeltaruneMusicRando
                             foreach (var f in drSounds)
                             {
                                 temp = Path.GetFileName(f);
+                                backupFilePath = backupFolder.FullName + separator + temp;
                                 tempNames.Add(new SongFile(temp, true));
-                                if (makeBackup || !File.Exists(backupFolder.FullName + @"\" + temp))
+                                if (makeBackup || !File.Exists(backupFilePath))
                                 {
-                                    File.Move(f, backupFolder.FullName + @"\" + temp, true);
+                                    File.Delete(backupFilePath);
+                                    File.Move(f, backupFilePath);
                                 }
                                 else
                                 {
@@ -206,10 +256,11 @@ namespace DeltaruneMusicRando
 
                         var rng = new Random();
                         int i = 0;
+                        string tempPath;
                         foreach (var f in backupFolder.GetFiles())
                         {
-                            if (oggFiles.Contains((musicPath + @"\" + f.Name).Replace(@"\\", @"\")) ||
-                                (isDeltarune && options.SFX &&
+                            tempPath = (musicPath + separator + f.Name).Replace($"{separator}{separator}", $"{separator}");
+                            if (oggFiles.Contains(tempPath) || (isDeltarune && options.SFX &&
                                 (f.Name.StartsWith("snd_") || f.Name.StartsWith("audio_intronoise"))))
                             {
                                 do
@@ -219,11 +270,11 @@ namespace DeltaruneMusicRando
 
                                 if (tempNames[i].FromBaseFolder)
                                 {
-                                    temp = basePath + @"\" + tempNames[i].Name;
+                                    temp = basePath + separator + tempNames[i].Name;
                                 }
                                 else
                                 {
-                                    temp = musicPath + @"\" + tempNames[i].Name;
+                                    temp = musicPath + separator + tempNames[i].Name;
                                 }
                                 File.Copy(f.FullName, temp);
                                 tempNames.RemoveAt(i);
@@ -234,8 +285,18 @@ namespace DeltaruneMusicRando
                         if (makeBackup)
                         {
                             temp += " Original files were copied to ";
-                            if (isDeltarune) { temp += @"\mus"; }
-                            temp += @"\backup";
+                            if (IsMac(basePath))
+                            {
+                                temp += "/Contents/Resources";
+                                if (isDeltarune) { temp += "/mus"; }
+                                temp += "/backup";
+                            }
+                            else if (IsLinux(basePath)) { temp += "/assets/backup"; }
+                            else
+                            {
+                                if (isDeltarune) { temp += @"\mus"; }
+                                temp += @"\backup";
+                            }
                         }
                         return new RandoResult(temp, true);
                     }
@@ -264,17 +325,16 @@ namespace DeltaruneMusicRando
         {
             try
             {
-                string musicPath = basePath;
+                string musicPath = GetMusicPath(basePath), backupPath = GetBackupPath(basePath);
                 bool isDeltarune = IsDeltarune(basePath);
-                if (isDeltarune) { musicPath += @"\mus"; }
-                foreach (var f in Directory.GetFiles(musicPath + @"\backup"))
+                foreach (var f in Directory.GetFiles(backupPath))
                 {
                     string destPath = musicPath, fileName = Path.GetFileName(f);
                     if (isDeltarune && (fileName.StartsWith("snd_") || fileName.ToLower().StartsWith("audio_intronoise")))
                     {
-                        destPath = basePath;
+                        destPath = GetBasePath(basePath);
                     }
-                    destPath += @"\" + fileName;
+                    destPath += GetSeparator(basePath) + fileName;
 
                     if (File.Exists(destPath))
                     {

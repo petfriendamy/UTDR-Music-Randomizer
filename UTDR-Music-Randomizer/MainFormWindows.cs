@@ -1,10 +1,15 @@
-namespace DeltaruneMusicRando
-{
-    public partial class Form1 : Form
-    {
-        
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
-        public Form1()
+namespace UTDRMusicRandomizer
+{
+    public partial class MainFormWindows : Form
+    {
+
+
+        public MainFormWindows()
         {
             InitializeComponent();
         }
@@ -18,7 +23,8 @@ namespace DeltaruneMusicRando
 
             foreach (var c in groupBoxOptions.Controls)
             {
-                if (c is CheckBox) {
+                if (c is CheckBox)
+                {
                     (c as CheckBox).Enabled = enable;
                 }
             }
@@ -99,7 +105,7 @@ namespace DeltaruneMusicRando
 
                 MessageBox.Show(task.Result.Message, (task.Result.Success ? "Success" : "Error"),
                     MessageBoxButtons.OK, (task.Result.Success ? MessageBoxIcon.Information : MessageBoxIcon.Error));
-                
+
                 EnableOrDisableControls(true);
             }
         }

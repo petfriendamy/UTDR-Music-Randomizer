@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<stetic-interface>
+  <configuration>
+    <images-root-path>..</images-root-path>
+    <target-gtk-version>2.12</target-gtk-version>
+  </configuration>
+  <import>
+    <widget-library name="../bin/Debug/UTDR-Music-Randomizer.exe" internal="true" />
+  </import>
+  <widget class="Gtk.Window" id="UTDRMusicRandomizer.MainWindowUnix" design-size="560 363">
+    <property name="MemberName" />
+    <property name="Title" translatable="yes">UTDR Music Randomizer</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <property name="BorderWidth">10</property>
+    <property name="Resizable">False</property>
+    <property name="AllowGrow">False</property>
+    <signal name="DeleteEvent" handler="OnDeleteEvent" />
+    <child>
+      <widget class="Gtk.Fixed" id="fixedContainerMain">
+        <property name="MemberName" />
+        <property name="HasWindow">False</property>
+        <child>
+          <widget class="Gtk.Frame" id="frameOptions">
+            <property name="MemberName" />
+            <property name="WidthRequest">520</property>
+            <property name="HeightRequest">180</property>
+            <property name="ShadowType">In</property>
+            <child>
+              <widget class="Gtk.Alignment" id="GtkAlignment">
+                <property name="MemberName" />
+                <property name="WidthRequest">366</property>
+                <property name="HeightRequest">132</property>
+                <property name="Xalign">0</property>
+                <property name="Yalign">0</property>
+                <property name="LeftPadding">12</property>
+                <property name="BorderWidth">1</property>
+                <child>
+                  <widget class="Gtk.Fixed" id="fixedContainerOptions">
+                    <property name="MemberName" />
+                    <property name="HasWindow">False</property>
+                    <child>
+                      <widget class="Gtk.CheckButton" id="checkbuttonSpeedrunLegal">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Label" translatable="yes">Include cyber.ogg and mansion.ogg (applies to DR only)</property>
+                        <property name="DrawIndicator">True</property>
+                        <property name="HasLabel">True</property>
+                        <property name="UseUnderline">True</property>
+                      </widget>
+                      <packing>
+                        <property name="Y">5</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.CheckButton" id="checkbuttonCyberBattle">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Label" translatable="yes">Include cyber_battle_prelude.ogg (DR only, may cause softlocks)</property>
+                        <property name="DrawIndicator">True</property>
+                        <property name="HasLabel">True</property>
+                      </widget>
+                      <packing>
+                        <property name="Y">30</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.CheckButton" id="checkbuttonMultiPart">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Label" translatable="yes">Include Your Best Nightmare + Finale (UT only)</property>
+                        <property name="DrawIndicator">True</property>
+                        <property name="HasLabel">True</property>
+                      </widget>
+                      <packing>
+                        <property name="Y">55</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.CheckButton" id="checkbuttonAmbience">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Label" translatable="yes">Include ambient sounds</property>
+                        <property name="DrawIndicator">True</property>
+                        <property name="HasLabel">True</property>
+                        <property name="UseUnderline">True</property>
+                      </widget>
+                      <packing>
+                        <property name="Y">105</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.CheckButton" id="checkbuttonSFX">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Label" translatable="yes">Include jingles and SFX (may have VERY BAD results)</property>
+                        <property name="DrawIndicator">True</property>
+                        <property name="HasLabel">True</property>
+                        <property name="UseUnderline">True</property>
+                      </widget>
+                      <packing>
+                        <property name="Y">130</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.CheckButton" id="checkbuttonCredits">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Label" translatable="yes">Include credits songs</property>
+                        <property name="DrawIndicator">True</property>
+                        <property name="HasLabel">True</property>
+                        <property name="UseUnderline">True</property>
+                      </widget>
+                      <packing>
+                        <property name="Y">80</property>
+                      </packing>
+                    </child>
+                  </widget>
+                </child>
+              </widget>
+            </child>
+            <child>
+              <widget class="Gtk.Label" id="GtkLabelOptions">
+                <property name="MemberName" />
+                <property name="LabelProp" translatable="yes">Options</property>
+              </widget>
+              <packing>
+                <property name="type">label_item</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="X">5</property>
+            <property name="Y">65</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.Entry" id="entryInstallPath">
+            <property name="MemberName" />
+            <property name="WidthRequest">430</property>
+            <property name="CanFocus">True</property>
+            <property name="IsEditable">True</property>
+            <property name="InvisibleChar">•</property>
+          </widget>
+          <packing>
+            <property name="X">5</property>
+            <property name="Y">30</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.Button" id="buttonBrowse">
+            <property name="MemberName" />
+            <property name="WidthRequest">90</property>
+            <property name="CanFocus">True</property>
+            <property name="Type">TextOnly</property>
+            <property name="Label">Browse...</property>
+            <property name="UseUnderline">True</property>
+            <signal name="Clicked" handler="BrowseOnClick" />
+          </widget>
+          <packing>
+            <property name="X">440</property>
+            <property name="Y">28</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.Label" id="labelInstallPath">
+            <property name="MemberName" />
+            <property name="LabelProp" translatable="yes">Please locate Undertale/Deltarune's install path:</property>
+          </widget>
+          <packing>
+            <property name="X">5</property>
+            <property name="Y">5</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.Button" id="buttonRandomize">
+            <property name="MemberName" />
+            <property name="WidthRequest">520</property>
+            <property name="HeightRequest">40</property>
+            <property name="Sensitive">False</property>
+            <property name="CanFocus">True</property>
+            <property name="Type">TextOnly</property>
+            <property name="Label" translatable="yes">Randomize!</property>
+            <property name="UseUnderline">True</property>
+            <signal name="Clicked" handler="RandomizeOnClick" />
+          </widget>
+          <packing>
+            <property name="X">5</property>
+            <property name="Y">255</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.Button" id="buttonRestore">
+            <property name="MemberName" />
+            <property name="WidthRequest">520</property>
+            <property name="Sensitive">False</property>
+            <property name="CanFocus">True</property>
+            <property name="Type">TextOnly</property>
+            <property name="Label" translatable="yes">Restore from backup</property>
+            <property name="UseUnderline">True</property>
+          </widget>
+          <packing>
+            <property name="X">5</property>
+            <property name="Y">300</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+</stetic-interface>
