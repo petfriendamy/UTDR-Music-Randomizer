@@ -50,19 +50,19 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MainFormWindows.cs">
+    <Compile Include="MainFormOld.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainFormWindows.Designer.cs">
-      <DependentUpon>MainFormWindows.cs</DependentUpon>
+    <Compile Include="MainFormOld.Designer.cs">
+      <DependentUpon>MainFormOld.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="RandoOptions.cs" />
     <Compile Include="RandoResult.cs" />
     <Compile Include="UTDRRandomizer.cs" />
     <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="MainWindowUnix.cs" />
-    <Compile Include="gtk-gui\UTDRMusicRandomizer.MainWindowUnix.cs" />
+    <Compile Include="MainWindow.cs" />
+    <Compile Include="gtk-gui\UTDRMusicRandomizer.MainWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL" />
@@ -82,8 +82,8 @@
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainFormWindows.resx">
-      <DependentUpon>MainFormWindows.cs</DependentUpon>
+    <EmbeddedResource Include="MainFormOld.resx">
+      <DependentUpon>MainFormOld.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

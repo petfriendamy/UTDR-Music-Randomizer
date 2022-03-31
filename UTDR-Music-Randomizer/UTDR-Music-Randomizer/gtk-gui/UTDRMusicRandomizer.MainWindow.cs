@@ -1,7 +1,7 @@
 
 namespace UTDRMusicRandomizer
 {
-	public partial class MainWindowUnix
+	public partial class MainWindow
 	{
 		private global::Gtk.Fixed fixedContainerMain;
 

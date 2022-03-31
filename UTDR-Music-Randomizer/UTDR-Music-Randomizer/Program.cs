@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using Gtk;
 
 namespace UTDRMusicRandomizer
 {
@@ -14,19 +14,10 @@ namespace UTDRMusicRandomizer
         [STAThread]
         static void Main()
         {
-            try //attempt to run the GTK form
-            {
-                Gtk.Application.Init();
-                var win = new MainWindowUnix();
-                win.Show();
-                Gtk.Application.Run();
-            }
-            catch (TypeInitializationException)
-            {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new MainFormWindows());
-            }
+            Application.Init();
+            var win = new MainWindow();
+            win.Show();
+            Application.Run();
         }
     }
 }

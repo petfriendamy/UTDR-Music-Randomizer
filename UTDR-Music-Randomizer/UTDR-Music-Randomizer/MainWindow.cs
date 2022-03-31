@@ -5,9 +5,9 @@ using Gtk;
 
 namespace UTDRMusicRandomizer
 {
-    public partial class MainWindowUnix : Window
+    public partial class MainWindow : Window
     {
-        public MainWindowUnix() : base(WindowType.Toplevel)
+        public MainWindow() : base(WindowType.Toplevel)
         {
             Build();
         }
