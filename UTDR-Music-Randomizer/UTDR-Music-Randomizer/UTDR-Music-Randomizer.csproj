@@ -65,30 +65,7 @@
     <Compile Include="gtk-gui\UTDRMusicRandomizer.MainWindowUnix.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="AtkSharp, Version=3.24.24.34, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AtkSharp.3.24.24.34\lib\netstandard2.0\AtkSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="CairoSharp, Version=3.24.24.34, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CairoSharp.3.24.24.34\lib\netstandard2.0\CairoSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="GdkSharp, Version=3.24.24.34, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GdkSharp.3.24.24.34\lib\netstandard2.0\GdkSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="GioSharp, Version=3.24.24.34, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GioSharp.3.24.24.34\lib\netstandard2.0\GioSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="GLibSharp, Version=3.24.24.34, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GLibSharp.3.24.24.34\lib\netstandard2.0\GLibSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="GtkSharp, Version=3.24.24.34, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GtkSharp.3.24.24.34\lib\netstandard2.0\GtkSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Posix, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\Mono.Posix-4.5.4.5.0\lib\net45\Mono.Posix.dll</HintPath>
-    </Reference>
-    <Reference Include="PangoSharp, Version=3.24.24.34, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PangoSharp.3.24.24.34\lib\netstandard2.0\PangoSharp.dll</HintPath>
-    </Reference>
+    <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows" />
@@ -121,15 +98,5 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\GtkSharp.3.24.24.34\build\GtkSharp.targets" Condition="Exists('..\packages\GtkSharp.3.24.24.34\build\GtkSharp.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\GtkSharp.3.24.24.34\build\GtkSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GtkSharp.3.24.24.34\build\GtkSharp.targets'))" />
-  </Target>
 </Project>
