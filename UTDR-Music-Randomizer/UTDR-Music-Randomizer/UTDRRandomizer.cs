@@ -111,7 +111,8 @@ namespace UTDRMusicRandomizer
 
         public static bool IsMac(string basePath)
         {
-            return (Path.GetFileName(basePath) == "UNDERTALE.app" || Path.GetFileName(basePath) == "DELTARUNE.app") && Directory.Exists(basePath + "/Contents");
+            return (Path.GetFileName(basePath) == "UNDERTALE.app" || Path.GetFileName(basePath) == "DELTARUNE.app"
+                || Path.GetFileName(basePath) == "SURVEY_PROGRAM.app") && Directory.Exists(basePath + "/Contents");
         }
 
         public static bool IsLinux(string basePath)

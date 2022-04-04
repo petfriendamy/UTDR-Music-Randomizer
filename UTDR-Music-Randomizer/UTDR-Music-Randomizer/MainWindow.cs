@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
 using Gtk;
 
 namespace UTDRMusicRandomizer
@@ -79,7 +78,7 @@ namespace UTDRMusicRandomizer
             }
         }
 
-        protected async void RandomizeOnClick(object sender, EventArgs e)
+        protected void RandomizeOnClick(object sender, EventArgs e)
         {
             if (!Directory.Exists(entryInstallPath.Text))
             {
@@ -111,24 +110,14 @@ namespace UTDRMusicRandomizer
                     checkbuttonMultiPart.Active, checkbuttonCredits.Active, checkbuttonAmbience.Active,
                     checkbuttonSFX.Active);
 
-                RandoResult result;
-                if (UTDRRandomizer.IsMac(entryInstallPath.Text)) //prevents a crash
-                {
-                    result = UTDRRandomizer.Randomize(entryInstallPath.Text, options, makeBackup);
-                }
-                else
-                {
-                    Task<RandoResult> task = Task.Run(() => UTDRRandomizer.Randomize(entryInstallPath.Text, options, makeBackup));
-                    await task;
-                    result = task.Result;
-                }
+                var result = UTDRRandomizer.Randomize(entryInstallPath.Text, options, makeBackup);
                 ShowDialog(result.Message, (result.Success ? MessageType.Info : MessageType.Error));
 
                 EnableOrDisableControls(true);
             }
         }
 
-        protected async void RestoreOnClick(object sender, EventArgs e)
+        protected void RestoreOnClick(object sender, EventArgs e)
         {
             if (!UTDRRandomizer.IsValidPath(entryInstallPath.Text))
             {
@@ -141,17 +130,7 @@ namespace UTDRMusicRandomizer
             else
             {
                 EnableOrDisableControls(false);
-                bool restored = false;
-                if (UTDRRandomizer.IsMac(entryInstallPath.Text)) //prevents a crash
-                {
-                    restored = UTDRRandomizer.RestoreFromBackup(entryInstallPath.Text);
-                }
-                else
-                {
-                    Task<bool> task = Task.Run(() => UTDRRandomizer.RestoreFromBackup(entryInstallPath.Text));
-                    await task;
-                    restored = task.Result;
-                }
+                bool restored = UTDRRandomizer.RestoreFromBackup(entryInstallPath.Text);
                 if (restored)
                 {
                     ShowDialog("Restored from backup!", MessageType.Info);
