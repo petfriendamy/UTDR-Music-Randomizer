@@ -5,11 +5,11 @@ using System.Windows.Forms;
 
 namespace UTDRMusicRandomizer
 {
-    public partial class MainFormWindows : Form
+    public partial class MainForm : Form
     {
 
 
-        public MainFormWindows()
+        public MainForm()
         {
             InitializeComponent();
         }

@@ -2,7 +2,7 @@
 
 namespace UTDRMusicRandomizer
 {
-    partial class MainFormWindows : Form
+    partial class MainForm : Form
     {
         /// <summary>
         ///  Required designer variable.

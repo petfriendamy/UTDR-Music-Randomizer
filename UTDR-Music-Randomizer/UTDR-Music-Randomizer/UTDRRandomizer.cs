@@ -59,17 +59,16 @@ namespace UTDRMusicRandomizer
 
         private static string[] SoundsUndertale = new string[]
         {
-            "abc_123_a", "mus_alphysfix", "mus_bergentruckung", "mus_churchbell",
-            "mus_computer", "mus_cymbal", "mus_dogmeander", "mus_doorclose",
-            "mus_dooropen", "mus_drone", "mus_dununnn", "mus_f_alarm", "mus_f_destroyed",
-            "mus_f_destroyed2", "mus_f_destroyed3", "mus_f_newlaugh", "mus_f_newlaugh_low",
-            "mus_fearsting", "mus_harpnoise", "mus_intronoise", "mus_mett_applause",
-            "mus_mett_cheer", "mus_mode", "mus_myemeow", "mus_ohyes", "mus_rimshot",
-            "mus_sfx_a_grab", "mus_sfx_chainsaw", "mus_sfx_hypergoner_charge",
-            "mus_sfx_hypergoner_laugh", "mus_sfx_hypergoner_hold", "mus_snowwalk",
-            "mus_sticksnap", "mus_wawa", "mus_whoopee", "snd_ballchime", "snd_bombfall",
-            "snd_bombsplosion", "snd_buzzing", "snd_curtgunshot", "snd_fall2", "snd_flameloop",
-            "snd_heavydamage", "snd_mushroomdance"
+            "abc_123_a", "mus_alphysfix", "mus_churchbell", "mus_computer", "mus_cymbal",
+            "mus_dogmeander", "mus_doorclose", "mus_dooropen", "mus_drone", "mus_dununnn",
+            "mus_f_alarm", "mus_f_destroyed", "mus_f_destroyed2", "mus_f_destroyed3",
+            "mus_f_newlaugh", "mus_f_newlaugh_low", "mus_fearsting", "mus_harpnoise",
+            "mus_intronoise", "mus_mett_applause", "mus_mett_cheer", "mus_mode", "mus_myemeow",
+            "mus_ohyes", "mus_rimshot", "mus_sfx_a_grab", "mus_sfx_chainsaw",
+            "mus_sfx_hypergoner_charge", "mus_sfx_hypergoner_laugh", "mus_sfx_hypergoner_hold",
+            "mus_snowwalk", "mus_sticksnap", "mus_wawa", "mus_whoopee", "snd_ballchime",
+            "snd_bombfall", "snd_bombsplosion", "snd_buzzing", "snd_curtgunshot", "snd_fall2",
+            "snd_flameloop", "snd_heavydamage", "snd_mushroomdance"
         };
 
         private struct SongFile
@@ -111,7 +110,8 @@ namespace UTDRMusicRandomizer
 
         public static bool IsMac(string basePath)
         {
-            return (Path.GetFileName(basePath) == "UNDERTALE.app" || Path.GetFileName(basePath) == "DELTARUNE.app") && Directory.Exists(basePath + "/Contents");
+            return (Path.GetFileName(basePath) == "UNDERTALE.app" || Path.GetFileName(basePath) == "DELTARUNE.app"
+                || Path.GetFileName(basePath) == "SURVEY_PROGRAM.app") && Directory.Exists(basePath + "/Contents");
         }
 
         public static bool IsLinux(string basePath)

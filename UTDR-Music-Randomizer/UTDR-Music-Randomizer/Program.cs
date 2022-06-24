@@ -14,19 +14,9 @@ namespace UTDRMusicRandomizer
         [STAThread]
         static void Main()
         {
-            try //attempt to run the GTK form
-            {
-                Gtk.Application.Init();
-                var win = new MainWindowUnix();
-                win.Show();
-                Gtk.Application.Run();
-            }
-            catch (TypeInitializationException)
-            {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new MainFormWindows());
-            }
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new MainForm());
         }
     }
 }
