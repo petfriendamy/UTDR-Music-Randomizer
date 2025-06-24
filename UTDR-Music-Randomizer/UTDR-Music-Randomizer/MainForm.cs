@@ -16,7 +16,7 @@ namespace UTDRMusicRandomizer
 
         private void EnableOrDisableControls(bool enable)
         {
-            textBoxMusFolder.Enabled = enable;
+            textBoxBrowse.Enabled = enable;
             buttonBrowse.Enabled = enable;
             buttonRandomize.Enabled = enable;
             buttonRestore.Enabled = enable;
@@ -25,7 +25,8 @@ namespace UTDRMusicRandomizer
             {
                 if (c is CheckBox)
                 {
-                    (c as CheckBox).Enabled = enable;
+                    var cb = c as CheckBox;
+                    if (cb != null) { cb.Enabled = enable; }
                 }
             }
         }
@@ -47,7 +48,7 @@ namespace UTDRMusicRandomizer
                 {
                     if (UTDRRandomizer.IsValidPath(path))
                     {
-                        textBoxMusFolder.Text = path;
+                        textBoxBrowse.Text = path;
                         buttonRandomize.Enabled = true;
                         buttonRestore.Enabled = true;
                     }
@@ -67,12 +68,12 @@ namespace UTDRMusicRandomizer
 
         private async void buttonRandomize_Click(object sender, EventArgs e)
         {
-            if (!Directory.Exists(textBoxMusFolder.Text))
+            if (!Directory.Exists(textBoxBrowse.Text))
             {
                 MessageBox.Show("Directory doesn't exist.", "Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
-            else if (!UTDRRandomizer.IsValidPath(textBoxMusFolder.Text))
+            else if (!UTDRRandomizer.IsValidPath(textBoxBrowse.Text))
             {
                 MessageBox.Show("Please select a valid install path.", "Invalid Path",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -81,7 +82,7 @@ namespace UTDRMusicRandomizer
             {
                 EnableOrDisableControls(false);
                 bool makeBackup = false;
-                if (UTDRRandomizer.BackupFolderExists(textBoxMusFolder.Text))
+                if (UTDRRandomizer.BackupFolderExists(textBoxBrowse.Text))
                 {
                     var result = MessageBox.Show("Backup folder already exists. Overwrite it? (If you have randomized previously, this will backup the randomized files!)",
                             "Overwrite Backup?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
@@ -98,9 +99,9 @@ namespace UTDRMusicRandomizer
 
                 var options = new RandoOptions(checkBoxSpeedrunLegal.Checked, checkBoxCyberBattle.Checked,
                     checkBoxMultiPart.Checked, checkBoxCredits.Checked, checkBoxAmbience.Checked,
-                    checkBoxSFX.Checked);
+                    checkBoxRhythmGame.Checked, checkBoxSFX.Checked);
 
-                Task<RandoResult> task = Task.Run(() => UTDRRandomizer.Randomize(textBoxMusFolder.Text, options, makeBackup));
+                Task<RandoResult> task = Task.Run(() => UTDRRandomizer.Randomize(textBoxBrowse.Text, options, makeBackup));
                 await task;
 
                 MessageBox.Show(task.Result.Message, (task.Result.Success ? "Success" : "Error"),
@@ -112,12 +113,12 @@ namespace UTDRMusicRandomizer
 
         private async void buttonRestore_Click(object sender, EventArgs e)
         {
-            if (!UTDRRandomizer.IsValidPath(textBoxMusFolder.Text))
+            if (!UTDRRandomizer.IsValidPath(textBoxBrowse.Text))
             {
                 MessageBox.Show("Please select a valid install path.", "Invalid Path",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (!UTDRRandomizer.BackupFolderExists(textBoxMusFolder.Text))
+            else if (!UTDRRandomizer.BackupFolderExists(textBoxBrowse.Text))
             {
                 MessageBox.Show("Backup folder doesn't exist.", "No backup",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -125,7 +126,7 @@ namespace UTDRMusicRandomizer
             else
             {
                 EnableOrDisableControls(false);
-                Task<bool> task = Task.Run(() => UTDRRandomizer.RestoreFromBackup(textBoxMusFolder.Text));
+                Task<bool> task = Task.Run(() => UTDRRandomizer.RestoreFromBackup(textBoxBrowse.Text));
                 await task;
                 bool restored = task.Result;
                 if (restored)

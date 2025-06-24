@@ -31,182 +31,204 @@ namespace UTDRMusicRandomizer
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.textBoxMusFolder = new System.Windows.Forms.TextBox();
-            this.buttonBrowse = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBoxOptions = new System.Windows.Forms.GroupBox();
-            this.checkBoxSFX = new System.Windows.Forms.CheckBox();
-            this.checkBoxMultiPart = new System.Windows.Forms.CheckBox();
-            this.checkBoxCyberBattle = new System.Windows.Forms.CheckBox();
-            this.checkBoxCredits = new System.Windows.Forms.CheckBox();
-            this.checkBoxAmbience = new System.Windows.Forms.CheckBox();
-            this.checkBoxSpeedrunLegal = new System.Windows.Forms.CheckBox();
-            this.buttonRandomize = new System.Windows.Forms.Button();
-            this.buttonRestore = new System.Windows.Forms.Button();
-            this.groupBoxOptions.SuspendLayout();
-            this.SuspendLayout();
+            textBoxBrowse = new TextBox();
+            buttonBrowse = new Button();
+            labelBrowse = new Label();
+            groupBoxOptions = new GroupBox();
+            checkBoxRhythmGame = new CheckBox();
+            checkBoxSFX = new CheckBox();
+            checkBoxMultiPart = new CheckBox();
+            checkBoxCyberBattle = new CheckBox();
+            checkBoxCredits = new CheckBox();
+            checkBoxAmbience = new CheckBox();
+            checkBoxSpeedrunLegal = new CheckBox();
+            buttonRandomize = new Button();
+            buttonRestore = new Button();
+            groupBoxOptions.SuspendLayout();
+            SuspendLayout();
             // 
-            // textBoxMusFolder
+            // textBoxBrowse
             // 
-            this.textBoxMusFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxMusFolder.Location = new System.Drawing.Point(10, 23);
-            this.textBoxMusFolder.Name = "textBoxMusFolder";
-            this.textBoxMusFolder.Size = new System.Drawing.Size(325, 20);
-            this.textBoxMusFolder.TabIndex = 0;
+            textBoxBrowse.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            textBoxBrowse.Location = new Point(12, 27);
+            textBoxBrowse.Margin = new Padding(4, 3, 4, 3);
+            textBoxBrowse.Name = "textBoxBrowse";
+            textBoxBrowse.Size = new Size(359, 23);
+            textBoxBrowse.TabIndex = 0;
             // 
             // buttonBrowse
             // 
-            this.buttonBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBrowse.Location = new System.Drawing.Point(340, 23);
-            this.buttonBrowse.Name = "buttonBrowse";
-            this.buttonBrowse.Size = new System.Drawing.Size(64, 20);
-            this.buttonBrowse.TabIndex = 1;
-            this.buttonBrowse.Text = "Browse...";
-            this.buttonBrowse.UseVisualStyleBackColor = true;
-            this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
+            buttonBrowse.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonBrowse.Location = new Point(377, 27);
+            buttonBrowse.Margin = new Padding(4, 3, 4, 3);
+            buttonBrowse.Name = "buttonBrowse";
+            buttonBrowse.Size = new Size(75, 23);
+            buttonBrowse.TabIndex = 1;
+            buttonBrowse.Text = "Browse...";
+            buttonBrowse.UseVisualStyleBackColor = true;
+            buttonBrowse.Click += buttonBrowse_Click;
             // 
-            // label1
+            // labelBrowse
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(239, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Please locate Undertale/Deltarune\'s install folder:";
+            labelBrowse.AutoSize = true;
+            labelBrowse.Location = new Point(12, 9);
+            labelBrowse.Margin = new Padding(4, 0, 4, 0);
+            labelBrowse.Name = "labelBrowse";
+            labelBrowse.Size = new Size(332, 15);
+            labelBrowse.TabIndex = 2;
+            labelBrowse.Text = "Please locate the folder containing Undertale/Deltarune's EXE:";
             // 
             // groupBoxOptions
             // 
-            this.groupBoxOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxOptions.Controls.Add(this.checkBoxSFX);
-            this.groupBoxOptions.Controls.Add(this.checkBoxMultiPart);
-            this.groupBoxOptions.Controls.Add(this.checkBoxCyberBattle);
-            this.groupBoxOptions.Controls.Add(this.checkBoxCredits);
-            this.groupBoxOptions.Controls.Add(this.checkBoxAmbience);
-            this.groupBoxOptions.Controls.Add(this.checkBoxSpeedrunLegal);
-            this.groupBoxOptions.Location = new System.Drawing.Point(10, 49);
-            this.groupBoxOptions.Name = "groupBoxOptions";
-            this.groupBoxOptions.Size = new System.Drawing.Size(394, 156);
-            this.groupBoxOptions.TabIndex = 3;
-            this.groupBoxOptions.TabStop = false;
-            this.groupBoxOptions.Text = "Options";
+            groupBoxOptions.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBoxOptions.Controls.Add(checkBoxRhythmGame);
+            groupBoxOptions.Controls.Add(checkBoxSFX);
+            groupBoxOptions.Controls.Add(checkBoxMultiPart);
+            groupBoxOptions.Controls.Add(checkBoxCyberBattle);
+            groupBoxOptions.Controls.Add(checkBoxCredits);
+            groupBoxOptions.Controls.Add(checkBoxAmbience);
+            groupBoxOptions.Controls.Add(checkBoxSpeedrunLegal);
+            groupBoxOptions.Location = new Point(12, 57);
+            groupBoxOptions.Margin = new Padding(4, 3, 4, 3);
+            groupBoxOptions.Name = "groupBoxOptions";
+            groupBoxOptions.Padding = new Padding(4, 3, 4, 3);
+            groupBoxOptions.Size = new Size(440, 201);
+            groupBoxOptions.TabIndex = 3;
+            groupBoxOptions.TabStop = false;
+            groupBoxOptions.Text = "Options";
+            // 
+            // checkBoxRhythmGame
+            // 
+            checkBoxRhythmGame.AutoSize = true;
+            checkBoxRhythmGame.Location = new Point(6, 147);
+            checkBoxRhythmGame.Margin = new Padding(4, 3, 4, 3);
+            checkBoxRhythmGame.Name = "checkBoxRhythmGame";
+            checkBoxRhythmGame.Size = new Size(356, 19);
+            checkBoxRhythmGame.TabIndex = 6;
+            checkBoxRhythmGame.Text = "Include rhythm game songs (DR only, may sound REALLY bad)";
+            checkBoxRhythmGame.UseVisualStyleBackColor = true;
             // 
             // checkBoxSFX
             // 
-            this.checkBoxSFX.AutoSize = true;
-            this.checkBoxSFX.Location = new System.Drawing.Point(5, 127);
-            this.checkBoxSFX.Name = "checkBoxSFX";
-            this.checkBoxSFX.Size = new System.Drawing.Size(326, 17);
-            this.checkBoxSFX.TabIndex = 5;
-            this.checkBoxSFX.Text = "Include jingles and sound effects (may have VERY BAD results)";
-            this.checkBoxSFX.UseVisualStyleBackColor = true;
+            checkBoxSFX.AutoSize = true;
+            checkBoxSFX.Location = new Point(6, 172);
+            checkBoxSFX.Margin = new Padding(4, 3, 4, 3);
+            checkBoxSFX.Name = "checkBoxSFX";
+            checkBoxSFX.Size = new Size(314, 19);
+            checkBoxSFX.TabIndex = 5;
+            checkBoxSFX.Text = "Include jingles and sound effects (may be even worse!)";
+            checkBoxSFX.UseVisualStyleBackColor = true;
             // 
             // checkBoxMultiPart
             // 
-            this.checkBoxMultiPart.AutoSize = true;
-            this.checkBoxMultiPart.Location = new System.Drawing.Point(5, 62);
-            this.checkBoxMultiPart.Name = "checkBoxMultiPart";
-            this.checkBoxMultiPart.Size = new System.Drawing.Size(247, 17);
-            this.checkBoxMultiPart.TabIndex = 2;
-            this.checkBoxMultiPart.Text = "Include Your Best Nightmare + Finale (UT only)";
-            this.checkBoxMultiPart.UseVisualStyleBackColor = true;
+            checkBoxMultiPart.AutoSize = true;
+            checkBoxMultiPart.Location = new Point(6, 72);
+            checkBoxMultiPart.Margin = new Padding(4, 3, 4, 3);
+            checkBoxMultiPart.Name = "checkBoxMultiPart";
+            checkBoxMultiPart.Size = new Size(273, 19);
+            checkBoxMultiPart.TabIndex = 2;
+            checkBoxMultiPart.Text = "Include Your Best Nightmare + Finale (UT only)";
+            checkBoxMultiPart.UseVisualStyleBackColor = true;
             // 
             // checkBoxCyberBattle
             // 
-            this.checkBoxCyberBattle.AutoSize = true;
-            this.checkBoxCyberBattle.Location = new System.Drawing.Point(5, 41);
-            this.checkBoxCyberBattle.Name = "checkBoxCyberBattle";
-            this.checkBoxCyberBattle.Size = new System.Drawing.Size(296, 17);
-            this.checkBoxCyberBattle.TabIndex = 1;
-            this.checkBoxCyberBattle.Text = "Include cyber_battle_prelude.ogg (DR only, may softlock)";
-            this.checkBoxCyberBattle.UseVisualStyleBackColor = true;
+            checkBoxCyberBattle.AutoSize = true;
+            checkBoxCyberBattle.Location = new Point(6, 47);
+            checkBoxCyberBattle.Margin = new Padding(4, 3, 4, 3);
+            checkBoxCyberBattle.Name = "checkBoxCyberBattle";
+            checkBoxCyberBattle.Size = new Size(327, 19);
+            checkBoxCyberBattle.TabIndex = 1;
+            checkBoxCyberBattle.Text = "Include cyber_battle_prelude.ogg (DR only, may softlock)";
+            checkBoxCyberBattle.UseVisualStyleBackColor = true;
             // 
             // checkBoxCredits
             // 
-            this.checkBoxCredits.AutoSize = true;
-            this.checkBoxCredits.Location = new System.Drawing.Point(5, 84);
-            this.checkBoxCredits.Name = "checkBoxCredits";
-            this.checkBoxCredits.Size = new System.Drawing.Size(126, 17);
-            this.checkBoxCredits.TabIndex = 3;
-            this.checkBoxCredits.Text = "Include credits songs";
-            this.checkBoxCredits.UseVisualStyleBackColor = true;
+            checkBoxCredits.AutoSize = true;
+            checkBoxCredits.Location = new Point(6, 97);
+            checkBoxCredits.Margin = new Padding(4, 3, 4, 3);
+            checkBoxCredits.Name = "checkBoxCredits";
+            checkBoxCredits.Size = new Size(137, 19);
+            checkBoxCredits.TabIndex = 3;
+            checkBoxCredits.Text = "Include credits songs";
+            checkBoxCredits.UseVisualStyleBackColor = true;
             // 
             // checkBoxAmbience
             // 
-            this.checkBoxAmbience.AutoSize = true;
-            this.checkBoxAmbience.Location = new System.Drawing.Point(5, 106);
-            this.checkBoxAmbience.Name = "checkBoxAmbience";
-            this.checkBoxAmbience.Size = new System.Drawing.Size(110, 17);
-            this.checkBoxAmbience.TabIndex = 4;
-            this.checkBoxAmbience.Text = "Include ambience";
-            this.checkBoxAmbience.UseVisualStyleBackColor = true;
+            checkBoxAmbience.AutoSize = true;
+            checkBoxAmbience.Location = new Point(6, 122);
+            checkBoxAmbience.Margin = new Padding(4, 3, 4, 3);
+            checkBoxAmbience.Name = "checkBoxAmbience";
+            checkBoxAmbience.Size = new Size(120, 19);
+            checkBoxAmbience.TabIndex = 4;
+            checkBoxAmbience.Text = "Include ambience";
+            checkBoxAmbience.UseVisualStyleBackColor = true;
             // 
             // checkBoxSpeedrunLegal
             // 
-            this.checkBoxSpeedrunLegal.AutoSize = true;
-            this.checkBoxSpeedrunLegal.Location = new System.Drawing.Point(5, 19);
-            this.checkBoxSpeedrunLegal.Name = "checkBoxSpeedrunLegal";
-            this.checkBoxSpeedrunLegal.Size = new System.Drawing.Size(290, 17);
-            this.checkBoxSpeedrunLegal.TabIndex = 0;
-            this.checkBoxSpeedrunLegal.Text = "Include cyber.ogg and mansion.ogg (only applies to DR)";
-            this.checkBoxSpeedrunLegal.UseVisualStyleBackColor = true;
+            checkBoxSpeedrunLegal.AutoSize = true;
+            checkBoxSpeedrunLegal.Location = new Point(6, 22);
+            checkBoxSpeedrunLegal.Margin = new Padding(4, 3, 4, 3);
+            checkBoxSpeedrunLegal.Name = "checkBoxSpeedrunLegal";
+            checkBoxSpeedrunLegal.Size = new Size(323, 19);
+            checkBoxSpeedrunLegal.TabIndex = 0;
+            checkBoxSpeedrunLegal.Text = "Include cyber.ogg and mansion.ogg (only applies to DR)";
+            checkBoxSpeedrunLegal.UseVisualStyleBackColor = true;
             // 
             // buttonRandomize
             // 
-            this.buttonRandomize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRandomize.Enabled = false;
-            this.buttonRandomize.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.buttonRandomize.Location = new System.Drawing.Point(10, 210);
-            this.buttonRandomize.Name = "buttonRandomize";
-            this.buttonRandomize.Size = new System.Drawing.Size(394, 33);
-            this.buttonRandomize.TabIndex = 4;
-            this.buttonRandomize.Text = "Randomize!";
-            this.buttonRandomize.UseVisualStyleBackColor = true;
-            this.buttonRandomize.Click += new System.EventHandler(this.buttonRandomize_Click);
+            buttonRandomize.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            buttonRandomize.Enabled = false;
+            buttonRandomize.Font = new Font("Segoe UI", 12F);
+            buttonRandomize.Location = new Point(12, 263);
+            buttonRandomize.Margin = new Padding(4, 3, 4, 3);
+            buttonRandomize.Name = "buttonRandomize";
+            buttonRandomize.Size = new Size(440, 38);
+            buttonRandomize.TabIndex = 4;
+            buttonRandomize.Text = "Randomize!";
+            buttonRandomize.UseVisualStyleBackColor = true;
+            buttonRandomize.Click += buttonRandomize_Click;
             // 
             // buttonRestore
             // 
-            this.buttonRestore.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRestore.Enabled = false;
-            this.buttonRestore.Location = new System.Drawing.Point(10, 248);
-            this.buttonRestore.Name = "buttonRestore";
-            this.buttonRestore.Size = new System.Drawing.Size(394, 20);
-            this.buttonRestore.TabIndex = 5;
-            this.buttonRestore.Text = "Restore from backup";
-            this.buttonRestore.UseVisualStyleBackColor = true;
-            this.buttonRestore.Click += new System.EventHandler(this.buttonRestore_Click);
+            buttonRestore.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            buttonRestore.Enabled = false;
+            buttonRestore.Location = new Point(12, 307);
+            buttonRestore.Margin = new Padding(4, 3, 4, 3);
+            buttonRestore.Name = "buttonRestore";
+            buttonRestore.Size = new Size(440, 23);
+            buttonRestore.TabIndex = 5;
+            buttonRestore.Text = "Restore from backup";
+            buttonRestore.UseVisualStyleBackColor = true;
+            buttonRestore.Click += buttonRestore_Click;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(415, 278);
-            this.Controls.Add(this.buttonRestore);
-            this.Controls.Add(this.buttonRandomize);
-            this.Controls.Add(this.groupBoxOptions);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.buttonBrowse);
-            this.Controls.Add(this.textBoxMusFolder);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(388, 317);
-            this.Name = "MainForm";
-            this.Text = "Undertale/Deltarune Music Randomizer";
-            this.groupBoxOptions.ResumeLayout(false);
-            this.groupBoxOptions.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(464, 341);
+            Controls.Add(buttonRestore);
+            Controls.Add(buttonRandomize);
+            Controls.Add(groupBoxOptions);
+            Controls.Add(labelBrowse);
+            Controls.Add(buttonBrowse);
+            Controls.Add(textBoxBrowse);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(4, 3, 4, 3);
+            MinimumSize = new Size(410, 380);
+            Name = "MainForm";
+            Text = "Undertale/Deltarune Music Randomizer";
+            groupBoxOptions.ResumeLayout(false);
+            groupBoxOptions.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
         #endregion
 
-        private TextBox textBoxMusFolder;
+        private TextBox textBoxBrowse;
         private Button buttonBrowse;
-        private Label label1;
+        private Label labelBrowse;
         private GroupBox groupBoxOptions;
         private CheckBox checkBoxAmbience;
         private CheckBox checkBoxSpeedrunLegal;
@@ -216,5 +238,6 @@ namespace UTDRMusicRandomizer
         private CheckBox checkBoxMultiPart;
         private CheckBox checkBoxSFX;
         private Button buttonRestore;
+        private CheckBox checkBoxRhythmGame;
     }
 }
