@@ -14,10 +14,9 @@ namespace UTDRMusicRandomizer
         [STAThread]
         static void Main()
         {
-            Application.Init();
-            var win = new MainWindow();
-            win.Show();
-            Application.Run();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new MainForm());
         }
     }
 }
