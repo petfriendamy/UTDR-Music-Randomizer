@@ -265,11 +265,7 @@ namespace UTDRMusicRandomizer
                             if (makeBackup || !File.Exists(backupFilePath))
                             {
                                 File.Delete(backupFilePath);
-                                File.Move(f, backupFilePath);
-                            }
-                            else
-                            {
-                                File.Delete(f);
+                                File.Copy(f, backupFilePath);
                             }
                         }
 
@@ -283,6 +279,11 @@ namespace UTDRMusicRandomizer
                                     string path = GetChapterPath(basePath, i);
                                     if (Path.Exists(path))
                                     {
+                                        string chapterBackup = $"{backupFolder.FullName}{separator}chapter{i}";
+                                        if (!Directory.Exists(chapterBackup))
+                                        {
+                                            Directory.CreateDirectory(chapterBackup);
+                                        }
                                         var chFiles = Directory.GetFiles(path);
                                         var sounds = (from f in chFiles
                                             where Path.GetExtension(f) == ".ogg"
@@ -291,16 +292,12 @@ namespace UTDRMusicRandomizer
                                         foreach (var f in sounds)
                                         {
                                             temp = Path.GetFileName(f);
-                                            backupFilePath = backupFolder.FullName + separator + temp;
+                                            backupFilePath = chapterBackup + separator + temp;
                                             tempNames.Add(new SongFile(temp, true, i));
                                             if (makeBackup || !File.Exists(backupFilePath))
                                             {
                                                 File.Delete(backupFilePath);
-                                                File.Move(f, backupFilePath);
-                                            }
-                                            else
-                                            {
-                                                File.Delete(f);
+                                                File.Copy(f, backupFilePath);
                                             }
                                         }
                                     }
@@ -321,11 +318,7 @@ namespace UTDRMusicRandomizer
                                     if (makeBackup || !File.Exists(backupFilePath))
                                     {
                                         File.Delete(backupFilePath);
-                                        File.Move(f, backupFilePath);
-                                    }
-                                    else
-                                    {
-                                        File.Delete(f);
+                                        File.Copy(f, backupFilePath);
                                     }
                                 }
                             }
@@ -356,6 +349,7 @@ namespace UTDRMusicRandomizer
                                 {
                                     temp = musicPath + separator + tempNames[i].Name;
                                 }
+                                File.Delete(temp);
                                 File.Copy(f.FullName, temp);
                                 tempNames.RemoveAt(i);
                             }
@@ -406,44 +400,43 @@ namespace UTDRMusicRandomizer
             try
             {
                 string musicPath = GetMusicPath(basePath), backupPath = GetBackupPath(basePath);
-                bool isDeltarune = IsDeltarune(basePath), checkAllChapters;
+                char separator = GetSeparator(basePath);
+                bool isDeltarune = IsDeltarune(basePath);
 
                 foreach (var f in Directory.GetFiles(backupPath))
                 {
                     string destPath = musicPath, fileName = Path.GetFileName(f);
-                    checkAllChapters = false;
                     if (isDeltarune && IsFromBaseFolder(fileName))
                     {
                         destPath = GetBasePath(basePath);
-                        checkAllChapters = Path.Exists(GetChapterPath(basePath, 1));
                     }
 
-                    if (checkAllChapters) //copy this file to each chapter that has it
+                    destPath += separator + fileName;
+
+                    if (File.Exists(destPath))
                     {
-                        for (int i = 1; i <= 7; ++i)
+                        File.Delete(destPath);
+                    }
+                    File.Copy(f, destPath);
+                }
+
+                //check for files from individual chapters
+                for (int i = 1; i <= 7; ++i)
+                {
+                    string chapterBackup = backupPath + separator + $"chapter{i}";
+                    if (Directory.Exists(chapterBackup))
+                    {
+                        foreach (var f in Directory.GetFiles(chapterBackup))
                         {
-                            destPath = GetChapterPath(basePath, i);
-                            if (Path.Exists(destPath))
+                            string fileName = Path.GetFileName(f),
+                                destPath = GetChapterPath(basePath, i) + separator + fileName;
+
+                            if (File.Exists(destPath))
                             {
-                                destPath += GetSeparator(basePath) + fileName;
-
-                                if (File.Exists(destPath))
-                                {
-                                    File.Delete(destPath);
-                                    File.Copy(f, destPath);
-                                }
+                                File.Delete(destPath);
                             }
+                            File.Copy(f, destPath);
                         }
-                    }
-                    else //just copy it to the correct folder
-                    {
-                        destPath += GetSeparator(basePath) + fileName;
-
-                        if (File.Exists(destPath))
-                        {
-                            File.Delete(destPath);
-                        }
-                        File.Copy(f, destPath);
                     }
                 }
                 return true;
