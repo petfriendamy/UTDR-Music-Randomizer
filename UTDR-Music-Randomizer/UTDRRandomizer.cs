@@ -9,52 +9,61 @@ namespace UTDRMusicRandomizer
 {
     public static class UTDRRandomizer
     {
-        private static string[] SpeedrunIllegalSongs = new string[]
-        {
-            "cyber", "mansion"
-        };
+        private static string[] SpeedrunIllegalSongs =
+        [
+            "cyber", "mansion", "ch3_karaoke_no_guitar", "tenna_battle",
+            "board4_rhythm", "kris_piano_lower"
+        ];
 
-        private static string[] CreditsSongsDeltarune = new string[]
-        {
-            "dontforget", "ch2_credits", "ch4_credits"
-        };
+        private static string[] CreditsSongsDeltarune =
+        [
+            "dontforget", "ch2_credits", "ch4_credits", "ch5_credits"
+        ];
 
-        private static string[] CreditsSongsUndertale = new string[]
-        {
+        private static string[] CreditsSongsUndertale =
+        [
             "mus_cast_1", "mus_cast_2", "mus_cast_3", "mus_cast_4",
             "mus_cast_5", "mus_cast_6", "mus_cast_7", "mus_express_myself"
-        };
+        ];
 
-        private static string[] FloweyFightSongs = new string[]
-        {
+        private static string[] FloweyFightSongs =
+        [
             "mus_f_intro", "mus_f_part1", "mus_f_part2", "mus_f_part3",
             "mus_repeat_1", "mus_repeat_2", "mus_f_6s_1", "mus_f_6s_2",
             "mus_f_6s_3", "mus_f_6s_4", "mus_f_6s_5", "mus_f_6s_6",
             "mus_f_saved", "mus_f_finale_1", "mus_f_finale_1_l",
             "mus_f_finale_2", "mus_f_finale_3",
-        };
+        ];
 
-        private static string[] AmbienceDeltarune = new string[]
-        {
+        private static string[] MultiPartSongsDeltarune =
+        [
+            "field_of_hopes_insaneintherain_intro",
+            "statue_chord_basic", "statue_level1", "statue_level2", "statue_level4",
+            "statue2_level1", "statue2_level2", "statue2_level3", "statue2_level4",
+            "statue2_level5"
+        ];
+
+        private static string[] AmbienceDeltarune =
+        [
             "alley_ambience", "audio_drone", "bell_ambience", "bird", "board_ocean",
             "carol_appeared", "church_lightning", "deep_noise", "elevator", "heartbeat",
             "honksong", "knight_appears", "muffled_rain", "mus_birdnoise",
-            "mus_knightthought", "night_ambience", "noelleshouseoutside", "ocean", "raining",
-            "raining_in_church2", "shinkansen", "sink_noise", "strongwind_loop",
-            "tv_infrontof", "w", "wind_highplace", "wind"
-        };
+            "mus_knightthought", "night_ambience", "noelleshouseoutside", "ocean",
+            "raining", "raining_in_church2", "shinkansen", "sink_noise", "strongwind_loop",
+            "tin_night", "tv_infrontof", "w", "wind_highplace", "wind"
+        ];
 
-        private static string[] AmbienceUndertale = new string[]
-        {
+        private static string[] AmbienceUndertale =
+        [
             "mus_ambientwater", "mus_barrier", "mus_bgflamea", "mus_birdnoise",
             "mus_core_ambience", "mus_crickets", "mus_deeploop2", "mus_drone",
             "mus_elevator", "mus_elevator_last", "mus_f_wind1", "mus_f_wind2",
             "mus_oogloop", "mus_rain", "mus_rain_deep", "mus_tone2", "mus_tone3",
-            "mus_wind", "mus_zzz_c", "mus_zzz_c2"
-        };
+            "mus_wind", "mus_zzz_c", "mus_zzz_c2",
+        ];
 
-        private static string[] RhythmGameSongs = new string[]
-        {
+        private static string[] RhythmGameSongs =
+        [
             "battle_preview", "battle_preview_crisp", "board4_rhythm",
             "boxing_boss_preview", "boxing_boss_preview_crisp",
             "ch3_karaoke_example_guit_only", "ch3_karaoke_example_guitar_only_v2",
@@ -64,26 +73,31 @@ namespace UTDRMusicRandomizer
             "ch3_karaoke_preview_crisp", "ch3_tvtime_guitar",
             "ch3-practice_song_combined", "ch3-practice_song_noguit",
             "field_of_hopes_preview", "field_of_hopes_preview_crisp",
+            "rhythm_3rd_sanctuary_guit", "rhythm_3rd_sanctuary_noguit",
             "rhythm_knockdown_combined", "rhythm_knockdown_no_guit",
-            "tenna_battle_guitar", "tenna_battle_preview", "tenna_battle_preview_crisp"
-        };
+            "tenna_battle_guitar", "tenna_battle_preview", "tenna_battle_preview_crisp",
+            "4rd_sanctuary", "4rd_sanctuary_noguit"
+        ];
 
-        private static string[] SoundsDeltarune = new string[]
-        {
+        private static string[] ShortSongsDeltarune =
+        [
+            "keygen", "newscast", "spamton_meeting_intro"
+        ];
+
+        private static string[] SoundsDeltarune =
+        [
             "berdly_audience", "berdly_descend", "board_lancer_dig", "charjoined",
-            "ch4_first_intro", "ch4_first_intro_breaking", "cyber_battle_end",
-            "fanfare", "me", "ominous_message", "ominous_stab_harsh", "ominous_stab_harsh_2",
-            "ominous_worse", "pianpian", "queen_intro", "rtenna_zoom", "s_neo_clip",
-            "sadchord2", "sinedrone_danger", "sinedrone_danger_high", "sound_battle_bg",
-            "statue_chord_basic", "statue_level1", "statue_level2", "statue_level4",
-            "statue2_level1", "statue2_level2", "statue2_level3", "statue2_level4",
-            "statue2_level5", "spamton_laugh_noise", "static_placeholder", "tinnitus",
-            "tv_noise", "tv_static_bad", "wet_tapdancing", "wet_tapdancing_failed",
+            "ch4_first_intro", "ch4_first_intro_breaking", "ch5_intro_audio", "cyber_battle_end",
+            "deltarune_logo_ch5_itoki", "fanfare", "flowery_skateboard", "me", "ominous_message",
+            "ominous_stab_harsh", "ominous_stab_harsh_2", "ominous_worse", "pianpian", "queen_intro",
+            "rtenna_zoom", "s_neo_clip", "sadchord2", "silly_printer", "sinedrone_danger",
+            "sinedrone_danger_high", "sound_battle_bg", "spamton_laugh_noise", "static_placeholder",
+            "tinnitus", "tv_noise", "tv_static_bad", "wet_tapdancing", "wet_tapdancing_failed",
             "wet_tapdancing2"
-        };
+        ];
 
-        private static string[] SoundsUndertale = new string[]
-        {
+        private static string[] SoundsUndertale =
+        [
             "abc_123_a", "mus_alphysfix", "mus_churchbell", "mus_computer", "mus_cymbal",
             "mus_dogmeander", "mus_doorclose", "mus_dooropen", "mus_drone", "mus_dununnn",
             "mus_f_alarm", "mus_f_destroyed", "mus_f_destroyed2", "mus_f_destroyed3",
@@ -94,7 +108,7 @@ namespace UTDRMusicRandomizer
             "mus_snowwalk", "mus_sticksnap", "mus_wawa", "mus_whoopee", "snd_ballchime",
             "snd_bombfall", "snd_bombsplosion", "snd_buzzing", "snd_curtgunshot", "snd_fall2",
             "snd_flameloop", "snd_heavydamage", "snd_mushroomdance"
-        };
+        ];
 
         private struct SongFile
         {
@@ -221,8 +235,11 @@ namespace UTDRMusicRandomizer
                     where Path.GetExtension(f) == ".ogg"
                     where (options.SpeedrunLegal ? true : !SpeedrunIllegalSongs.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
                     where (options.CyberBattle ? true : Path.GetFileNameWithoutExtension(f) != "cyber_battle_prelude")
+                    where (options.MultiPart ? true : !MultiPartSongsDeltarune.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
                     where (options.CreditsSongs ? true : !CreditsSongsDeltarune.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
                     where (options.Ambience ? true : !AmbienceDeltarune.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
+                    where (options.ShortSongs ? true : !ShortSongsDeltarune.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
+                    where (options.KrisPiano ? true : !Path.GetFileNameWithoutExtension(f).StartsWith("kris_piano"))
                     where (options.RhythmGame ? true : !RhythmGameSongs.Contains(Path.GetFileNameWithoutExtension(f)))
                     where (options.SFX ? true : !SoundsDeltarune.Contains(Path.GetFileNameWithoutExtension(f).ToLower()))
                     select f;

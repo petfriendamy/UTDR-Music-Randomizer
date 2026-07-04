@@ -35,6 +35,7 @@ namespace UTDRMusicRandomizer
             buttonBrowse = new Button();
             labelBrowse = new Label();
             groupBoxOptions = new GroupBox();
+            checkBoxKrisPiano = new CheckBox();
             checkBoxRhythmGame = new CheckBox();
             checkBoxSFX = new CheckBox();
             checkBoxMultiPart = new CheckBox();
@@ -44,6 +45,7 @@ namespace UTDRMusicRandomizer
             checkBoxSpeedrunLegal = new CheckBox();
             buttonRandomize = new Button();
             buttonRestore = new Button();
+            checkBoxShortSongs = new CheckBox();
             groupBoxOptions.SuspendLayout();
             SuspendLayout();
             // 
@@ -81,6 +83,8 @@ namespace UTDRMusicRandomizer
             // groupBoxOptions
             // 
             groupBoxOptions.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBoxOptions.Controls.Add(checkBoxShortSongs);
+            groupBoxOptions.Controls.Add(checkBoxKrisPiano);
             groupBoxOptions.Controls.Add(checkBoxRhythmGame);
             groupBoxOptions.Controls.Add(checkBoxSFX);
             groupBoxOptions.Controls.Add(checkBoxMultiPart);
@@ -92,15 +96,25 @@ namespace UTDRMusicRandomizer
             groupBoxOptions.Margin = new Padding(4, 3, 4, 3);
             groupBoxOptions.Name = "groupBoxOptions";
             groupBoxOptions.Padding = new Padding(4, 3, 4, 3);
-            groupBoxOptions.Size = new Size(440, 201);
+            groupBoxOptions.Size = new Size(440, 261);
             groupBoxOptions.TabIndex = 3;
             groupBoxOptions.TabStop = false;
             groupBoxOptions.Text = "Options";
             // 
+            // checkBoxKrisPiano
+            // 
+            checkBoxKrisPiano.AutoSize = true;
+            checkBoxKrisPiano.Location = new Point(6, 122);
+            checkBoxKrisPiano.Name = "checkBoxKrisPiano";
+            checkBoxKrisPiano.Size = new Size(209, 19);
+            checkBoxKrisPiano.TabIndex = 7;
+            checkBoxKrisPiano.Text = "Include Kris' piano songs (DR only)";
+            checkBoxKrisPiano.UseVisualStyleBackColor = true;
+            // 
             // checkBoxRhythmGame
             // 
             checkBoxRhythmGame.AutoSize = true;
-            checkBoxRhythmGame.Location = new Point(6, 147);
+            checkBoxRhythmGame.Location = new Point(6, 197);
             checkBoxRhythmGame.Margin = new Padding(4, 3, 4, 3);
             checkBoxRhythmGame.Name = "checkBoxRhythmGame";
             checkBoxRhythmGame.Size = new Size(356, 19);
@@ -111,7 +125,7 @@ namespace UTDRMusicRandomizer
             // checkBoxSFX
             // 
             checkBoxSFX.AutoSize = true;
-            checkBoxSFX.Location = new Point(6, 172);
+            checkBoxSFX.Location = new Point(6, 222);
             checkBoxSFX.Margin = new Padding(4, 3, 4, 3);
             checkBoxSFX.Name = "checkBoxSFX";
             checkBoxSFX.Size = new Size(314, 19);
@@ -125,9 +139,9 @@ namespace UTDRMusicRandomizer
             checkBoxMultiPart.Location = new Point(6, 72);
             checkBoxMultiPart.Margin = new Padding(4, 3, 4, 3);
             checkBoxMultiPart.Name = "checkBoxMultiPart";
-            checkBoxMultiPart.Size = new Size(273, 19);
+            checkBoxMultiPart.Size = new Size(313, 19);
             checkBoxMultiPart.TabIndex = 2;
-            checkBoxMultiPart.Text = "Include Your Best Nightmare + Finale (UT only)";
+            checkBoxMultiPart.Text = "Include multi-part and layered songs (may sound bad)";
             checkBoxMultiPart.UseVisualStyleBackColor = true;
             // 
             // checkBoxCyberBattle
@@ -155,7 +169,7 @@ namespace UTDRMusicRandomizer
             // checkBoxAmbience
             // 
             checkBoxAmbience.AutoSize = true;
-            checkBoxAmbience.Location = new Point(6, 122);
+            checkBoxAmbience.Location = new Point(6, 172);
             checkBoxAmbience.Margin = new Padding(4, 3, 4, 3);
             checkBoxAmbience.Name = "checkBoxAmbience";
             checkBoxAmbience.Size = new Size(120, 19);
@@ -169,9 +183,9 @@ namespace UTDRMusicRandomizer
             checkBoxSpeedrunLegal.Location = new Point(6, 22);
             checkBoxSpeedrunLegal.Margin = new Padding(4, 3, 4, 3);
             checkBoxSpeedrunLegal.Name = "checkBoxSpeedrunLegal";
-            checkBoxSpeedrunLegal.Size = new Size(323, 19);
+            checkBoxSpeedrunLegal.Size = new Size(238, 19);
             checkBoxSpeedrunLegal.TabIndex = 0;
-            checkBoxSpeedrunLegal.Text = "Include cyber.ogg and mansion.ogg (only applies to DR)";
+            checkBoxSpeedrunLegal.Text = "Keep speedrun legal (only applies to DR)";
             checkBoxSpeedrunLegal.UseVisualStyleBackColor = true;
             // 
             // buttonRandomize
@@ -179,7 +193,7 @@ namespace UTDRMusicRandomizer
             buttonRandomize.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             buttonRandomize.Enabled = false;
             buttonRandomize.Font = new Font("Segoe UI", 12F);
-            buttonRandomize.Location = new Point(12, 263);
+            buttonRandomize.Location = new Point(12, 323);
             buttonRandomize.Margin = new Padding(4, 3, 4, 3);
             buttonRandomize.Name = "buttonRandomize";
             buttonRandomize.Size = new Size(440, 38);
@@ -192,7 +206,7 @@ namespace UTDRMusicRandomizer
             // 
             buttonRestore.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             buttonRestore.Enabled = false;
-            buttonRestore.Location = new Point(12, 307);
+            buttonRestore.Location = new Point(12, 367);
             buttonRestore.Margin = new Padding(4, 3, 4, 3);
             buttonRestore.Name = "buttonRestore";
             buttonRestore.Size = new Size(440, 23);
@@ -201,11 +215,21 @@ namespace UTDRMusicRandomizer
             buttonRestore.UseVisualStyleBackColor = true;
             buttonRestore.Click += buttonRestore_Click;
             // 
+            // checkBoxShortSongs
+            // 
+            checkBoxShortSongs.AutoSize = true;
+            checkBoxShortSongs.Location = new Point(6, 147);
+            checkBoxShortSongs.Name = "checkBoxShortSongs";
+            checkBoxShortSongs.Size = new Size(205, 19);
+            checkBoxShortSongs.TabIndex = 8;
+            checkBoxShortSongs.Text = "Include short songs (e.g. KEYGEN)";
+            checkBoxShortSongs.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(464, 341);
+            ClientSize = new Size(464, 401);
             Controls.Add(buttonRestore);
             Controls.Add(buttonRandomize);
             Controls.Add(groupBoxOptions);
@@ -214,7 +238,7 @@ namespace UTDRMusicRandomizer
             Controls.Add(textBoxBrowse);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
-            MinimumSize = new Size(410, 380);
+            MinimumSize = new Size(410, 440);
             Name = "MainForm";
             Text = "Undertale/Deltarune Music Randomizer";
             groupBoxOptions.ResumeLayout(false);
@@ -239,5 +263,7 @@ namespace UTDRMusicRandomizer
         private CheckBox checkBoxSFX;
         private Button buttonRestore;
         private CheckBox checkBoxRhythmGame;
+        private CheckBox checkBoxKrisPiano;
+        private CheckBox checkBoxShortSongs;
     }
 }

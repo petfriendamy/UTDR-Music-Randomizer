@@ -13,17 +13,22 @@ namespace UTDRMusicRandomizer
         public bool MultiPart { get; }
         public bool CreditsSongs { get; }
         public bool Ambience { get; }
+        public bool ShortSongs { get; }
+        public bool KrisPiano { get; }
         public bool RhythmGame { get; }
         public bool SFX { get; }
 
         public RandoOptions(bool speedrunLegal, bool cyberBattle, bool multiPart,
-            bool creditsSongs, bool ambience, bool rhythmGame, bool sfx)
+            bool creditsSongs, bool ambience, bool shortSongs, bool krisPiano,
+            bool rhythmGame, bool sfx)
         {
             SpeedrunLegal = speedrunLegal;
             CyberBattle = cyberBattle;
             MultiPart = multiPart;
             CreditsSongs = creditsSongs;
             Ambience = ambience;
+            ShortSongs = shortSongs;
+            KrisPiano = krisPiano;
             RhythmGame = rhythmGame;
             SFX = sfx;
         }
