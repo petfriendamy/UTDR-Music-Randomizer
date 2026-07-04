@@ -99,7 +99,8 @@ namespace UTDRMusicRandomizer
 
                 var options = new RandoOptions(checkBoxSpeedrunLegal.Checked, checkBoxCyberBattle.Checked,
                     checkBoxMultiPart.Checked, checkBoxCredits.Checked, checkBoxAmbience.Checked,
-                    checkBoxKrisPiano.Checked, checkBoxRhythmGame.Checked, checkBoxSFX.Checked);
+                    checkBoxShortSongs.Checked, checkBoxKrisPiano.Checked, checkBoxRhythmGame.Checked,
+                    checkBoxSFX.Checked);
 
                 Task<RandoResult> task = Task.Run(() => UTDRRandomizer.Randomize(textBoxBrowse.Text, options, makeBackup));
                 await task;
